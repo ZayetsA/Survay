@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onix.internship.survay.signup.SignupViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signupContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_30"
+        tools:context=".signup.SignupFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/signupContainerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signupContainerTitleText"
+            android:textColor="@color/tab_color_unselected"
+            android:textSize="@dimen/text_48"
+            app:layout_constraintBottom_toTopOf="@id/signupContainerInputFirstNameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupContainerInputFirstNameLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:layout_constraintEnd_toStartOf="@id/signupContainerInputLastNameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupContainerTitle"
+            app:layout_constraintWidth_percent="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signupContainerInputFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/signupContainerFirstNameInputHint"
+                android:imeOptions="actionNext"
+                android:maxLength="20"
+                android:nextFocusRight="@id/signupContainerInputLastNameLayout"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupContainerInputLastNameLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/signupContainerInputFirstNameLayout"
+            app:layout_constraintTop_toBottomOf="@id/signupContainerTitle"
+            app:layout_constraintWidth_percent="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signupContainerInputLastName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/signupContainerLastNameInputHint"
+                android:maxLength="20"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupContainerInputLoginLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupContainerInputLastNameLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signupContainerInputLogin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_30"
+                android:hint="@string/signupContainerLoginInputHint"
+                android:maxLength="30"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupContainerInputPasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupContainerInputLoginLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signupContainerInputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_30"
+                android:hint="@string/signupContainerPasswordInputHint"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signupContainerInputPasswordConfirmationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupContainerInputPasswordLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signupContainerInputPasswordConfirmation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_30"
+                android:hint="@string/signupContainerPasswordConfirmationInputHint"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signupContainerSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30"
+            android:paddingStart="@dimen/padding_40"
+            android:paddingEnd="@dimen/padding_40"
+            android:text="@string/buttonSubmitText"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupContainerInputPasswordConfirmationLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

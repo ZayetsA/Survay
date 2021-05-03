@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_graph"
+    app:startDestination="@id/tabFragment">
+    <fragment
+        android:id="@+id/tabFragment"
+        android:name="com.onix.internship.survay.tab.TabFragment"
+        android:label="TabFragment" >
+        <action
+            android:id="@+id/action_tabFragment_to_userList2"
+            app:destination="@id/userList" />
+        <action
+            android:id="@+id/action_tabFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_tabFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.onix.internship.survay.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_userList3"
+            app:destination="@id/userList" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.onix.internship.survay.signup.SignupFragment"
+        android:label="SignupFragment" >
+        <action
+            android:id="@+id/action_signupFragment_to_userList2"
+            app:destination="@id/userList" />
+    </fragment>
+    <fragment
+        android:id="@+id/userList"
+        android:name="com.onix.internship.survay.userlist.UserList"
+        android:label="UserList" />
+</navigation>

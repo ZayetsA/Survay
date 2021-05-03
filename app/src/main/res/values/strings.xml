@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Survay</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_tab_description">Login</string>
+    <string name="register_tab_description">Register</string>
+    <string name="signupContainerTitleText">Welcome</string>
+    <string name="signupContainerFirstNameInputHint">First name</string>
+    <string name="signupContainerLastNameInputHint">Last name</string>
+    <string name="signupContainerLoginInputHint">Login</string>
+    <string name="signupContainerPasswordInputHint">Password</string>
+    <string name="signupContainerPasswordConfirmationInputHint">Password confirmation</string>
+    <string name="buttonSubmitText">Submit</string>
+    <string name="loginContainerTitleText">Hello</string>
+    <string name="buttonConnectText">Connect</string>
+</resources>
