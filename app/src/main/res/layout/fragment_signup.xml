@@ -54,6 +54,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
+                android:text="@={viewModel.inputFirstName}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +80,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
+                android:text="@={viewModel.inputLastName}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -104,6 +106,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
+                android:text="@={viewModel.inputUserLogin}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -129,6 +132,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
+                android:text="@={viewModel.inputPassword}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -154,6 +158,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
+                android:text="@={viewModel.inputPasswordConfirmation}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -166,6 +171,7 @@
             android:paddingStart="@dimen/padding_40"
             android:paddingEnd="@dimen/padding_40"
             android:text="@string/buttonSubmitText"
+            android:onClick="@{()->viewModel.showLoginFragment()}"
             android:textSize="@dimen/text_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
