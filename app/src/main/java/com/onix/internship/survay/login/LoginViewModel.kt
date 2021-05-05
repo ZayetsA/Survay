@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.events.SingleLiveEvent
+import com.onix.internship.survay.util.MD5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,8 +20,8 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
 
     private val _navigationLiveEvent = SingleLiveEvent<NavDirections>()
     val navigationLiveEvent: LiveData<NavDirections> = _navigationLiveEvent
-
-    val users = repository.users
+    val users = repository.allUsers
+    private val mD5 = MD5()
 
     @Bindable
     val inputUserName = MutableLiveData<String>()
@@ -55,7 +56,7 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
             uiScope.launch {
                 val userName = repository.getUserName(inputUserName.value!!)
                 if (userName != null) {
-                    if (userName.password == inputPassword.value) {
+                    if (userName.password == mD5.md5(inputPassword.value!!)) {
                         inputUserName.value = null
                         inputPassword.value = null
                         _acceptNavigation.value = true

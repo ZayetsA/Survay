@@ -34,6 +34,10 @@
     </fragment>
     <fragment
         android:id="@+id/userList"
-        android:name="com.onix.internship.survay.userlist.UserList"
-        android:label="UserList" />
+        android:name="com.onix.internship.survay.userlist.UserListFragment"
+        android:label="UserList" >
+        <action
+            android:id="@+id/action_userList_to_tabFragment"
+            app:destination="@id/tabFragment" />
+    </fragment>
 </navigation>

@@ -7,10 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.User
-import com.onix.internship.survay.events.SingleLiveEvent
+import com.onix.internship.survay.util.MD5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,12 +17,6 @@ import kotlinx.coroutines.launch
 
 class SignupViewModel(private val repository: RegisterRepository, application: Application) :
     AndroidViewModel(application), Observable {
-
-    private val _navigationLiveEvent = SingleLiveEvent<NavDirections>()
-    val navigationLiveEvent: LiveData<NavDirections> = _navigationLiveEvent
-
-    private val userData: String? = null
-    val userDetails = MutableLiveData<Array<User>>()
 
     @Bindable
     val inputFirstName = MutableLiveData<String>()
@@ -42,6 +35,7 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
 
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val mD5 = MD5()
 
     private val _navigate = MutableLiveData<Boolean>()
     val navigate: LiveData<Boolean>
@@ -77,8 +71,12 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
                         val firstName = inputFirstName.value!!
                         val lastName = inputLastName.value!!
                         val userLogin = inputUserLogin.value!!
-                        val password = inputPassword.value!!
-                        val role = 0
+                        val password = mD5.md5(inputPassword.value!!)
+                        val role: Int = if (repository.getNumUsers() == 0) {
+                            0
+                        } else {
+                            1
+                        }
                         insert(User(0, firstName, lastName, userLogin, password, role))
                         inputFirstName.value = null
                         inputLastName.value = null

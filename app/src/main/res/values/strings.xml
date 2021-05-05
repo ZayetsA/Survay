@@ -12,4 +12,5 @@
     <string name="buttonSubmitText">Submit</string>
     <string name="loginContainerTitleText">Hello</string>
     <string name="buttonConnectText">Connect</string>
+    <string name="default_description">some text</string>
 </resources>
