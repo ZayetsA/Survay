@@ -35,6 +35,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorEmptyLogin}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginContainerTitle">
 
@@ -60,6 +61,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorEmptyPassword}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginContainerInputLoginLayout">
 

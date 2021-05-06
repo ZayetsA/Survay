@@ -41,49 +41,83 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
     val navigate: LiveData<Boolean>
         get() = _navigate
 
-    private val _errorToast = MutableLiveData<Boolean>()
+    private val _errorEmptyFirstName = MutableLiveData<Boolean>()
 
-    val errorToast: LiveData<Boolean>
-        get() = _errorToast
+    val errorEmptyFirstName: LiveData<Boolean>
+        get() = _errorEmptyFirstName
 
-    private val _errorToastUsername = MutableLiveData<Boolean>()
+    private val _errorEmptySecondName = MutableLiveData<Boolean>()
 
-    val errorToastUsername: LiveData<Boolean>
-        get() = _errorToastUsername
+    val errorEmptySecondName: LiveData<Boolean>
+        get() = _errorEmptySecondName
 
-    private val _errorToastPassword = MutableLiveData<Boolean>()
+    private val _errorEmptyLogin = MutableLiveData<Boolean>()
 
-    val errorToastPassword: LiveData<Boolean>
-        get() = _errorToastPassword
+    val errorEmptyLogin: LiveData<Boolean>
+        get() = _errorEmptyLogin
+
+    private val _errorEmptyPassword = MutableLiveData<Boolean>()
+
+    val errorEmptyPassword: LiveData<Boolean>
+        get() = _errorEmptyPassword
+
+    private val _errorEmptyPasswordConfirmation = MutableLiveData<Boolean>()
+
+    val errorEmptyPasswordConfirmation: LiveData<Boolean>
+        get() = _errorEmptyPasswordConfirmation
+
+    private val _errorExistingUsername = MutableLiveData<Boolean>()
+
+    val errorExistingUsername: LiveData<Boolean>
+        get() = _errorExistingUsername
+
+    private val _errorPasswordMatch = MutableLiveData<Boolean>()
+
+    val errorPasswordMatch: LiveData<Boolean>
+        get() = _errorPasswordMatch
+
+    private val _errorPasswordDifficult = MutableLiveData<Boolean>()
+    val errorPasswordDifficult: LiveData<Boolean>
+        get() = _errorPasswordDifficult
 
     fun showLoginFragment() {
         if (checkError()) {
-            _errorToast.value = true
+            if (inputFirstName.value == null) _errorEmptyFirstName.value = true
+            if (inputLastName.value == null) _errorEmptySecondName.value = true
+            if (inputUserLogin.value == null) _errorEmptyLogin.value = true
+            if (inputPassword.value == null) _errorEmptyPassword.value = true
+            if (inputPasswordConfirmation.value == null) _errorEmptyPasswordConfirmation.value =
+                true
         } else {
             uiScope.launch {
                 val userName = inputUserLogin.value?.let { repository.getUserName(it) }
                 if (userName != null) {
-                    _errorToastUsername.value = true
+                    _errorExistingUsername.value = true
                 } else {
                     if (inputPassword.value != inputPasswordConfirmation.value) {
-                        _errorToastPassword.value = true
+                        _errorPasswordMatch.value = true
                     } else {
-                        val firstName = inputFirstName.value!!
-                        val lastName = inputLastName.value!!
-                        val userLogin = inputUserLogin.value!!
-                        val password = mD5.md5(inputPassword.value!!)
-                        val role: Int = if (repository.getNumUsers() == 0) {
-                            0
+                        if (inputPassword.value!!.length < 6) {
+                            _errorPasswordDifficult.value = true
                         } else {
-                            1
+                            val firstName = inputFirstName.value!!
+                            val lastName = inputLastName.value!!
+                            val userLogin = inputUserLogin.value!!
+                            val password = mD5.md5(inputPassword.value!!)
+                            val role: Int = if (repository.getNumUsers() == 0) {
+                                0
+                            } else {
+                                1
+                            }
+                            insert(User(0, firstName, lastName, userLogin, password, role))
+                            inputFirstName.value = null
+                            inputLastName.value = null
+                            inputUserLogin.value = null
+                            inputPassword.value = null
+                            inputPasswordConfirmation.value = null
+                            _navigate.value = true
+
                         }
-                        insert(User(0, firstName, lastName, userLogin, password, role))
-                        inputFirstName.value = null
-                        inputLastName.value = null
-                        inputUserLogin.value = null
-                        inputPassword.value = null
-                        inputPasswordConfirmation.value = null
-                        _navigate.value = true
                     }
                 }
             }
@@ -99,15 +133,15 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
     }
 
     fun doneNotificationUserName() {
-        _errorToastUsername.value = false
-    }
-
-    fun doneToast() {
-        _errorToast.value = false
+        _errorExistingUsername.value = false
     }
 
     fun donePasswordNotification() {
-        _errorToastPassword.value = false
+        _errorPasswordMatch.value = false
+    }
+
+    fun donePasswordDifficultNotification() {
+        _errorPasswordDifficult.value = false
     }
 
     private fun checkError(): Boolean {

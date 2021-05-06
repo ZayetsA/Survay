@@ -17,13 +17,23 @@
         android:layout_height="match_parent"
         tools:context=".userlist.UserListFragment">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/userListLayoutToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:background="@color/purple_500"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/userListRecycleView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/userListLayoutToolbar"
+            android:layout_marginTop="?attr/actionBarSize">
 
         </androidx.recyclerview.widget.RecyclerView>
 

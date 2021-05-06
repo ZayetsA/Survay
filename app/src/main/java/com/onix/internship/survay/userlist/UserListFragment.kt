@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onix.internship.survay.R
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.UserDatabase
 import com.onix.internship.survay.databinding.FragmentUserListBinding
@@ -40,6 +41,19 @@ class UserListFragment : Fragment() {
 
         initRecyclerView()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolBar()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setupToolBar() {
+        with(binding.userListLayoutToolbar) {
+            setNavigationIcon(R.drawable.toolbar_back_button_arrow)
+            title = context.getString(R.string.user_list_fragment_toolbar_title)
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
+        }
     }
 
     private fun initRecyclerView() {

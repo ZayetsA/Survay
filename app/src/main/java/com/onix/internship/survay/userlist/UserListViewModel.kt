@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.onix.internship.survay.database.RegisterRepository
 
 class UserListViewModel(repository: RegisterRepository, application: Application) : ViewModel() {
-    val allUsers = repository.allUsers
     val usersAndMentors = repository.usersAndMentors
 
     private val _acceptNavigation = MutableLiveData<Boolean>()
@@ -18,7 +17,4 @@ class UserListViewModel(repository: RegisterRepository, application: Application
         _acceptNavigation.value = false
     }
 
-    fun backButtonClicked() {
-        _acceptNavigation.value = true
-    }
 }

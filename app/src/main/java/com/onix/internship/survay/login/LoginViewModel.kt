@@ -6,9 +6,7 @@ import androidx.databinding.Observable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
-import com.onix.internship.survay.events.SingleLiveEvent
 import com.onix.internship.survay.util.MD5
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +16,6 @@ import kotlinx.coroutines.launch
 class LoginViewModel(private val repository: RegisterRepository, application: Application) :
     AndroidViewModel(application), Observable {
 
-    private val _navigationLiveEvent = SingleLiveEvent<NavDirections>()
-    val navigationLiveEvent: LiveData<NavDirections> = _navigationLiveEvent
-    val users = repository.allUsers
     private val mD5 = MD5()
 
     @Bindable
@@ -32,9 +27,15 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _emptyFieldsError = MutableLiveData<Boolean>()
-    val emptyFieldsError: LiveData<Boolean>
-        get() = _emptyFieldsError
+    private val _errorEmptyLogin = MutableLiveData<Boolean>()
+
+    val errorEmptyLogin: LiveData<Boolean>
+        get() = _errorEmptyLogin
+
+    private val _errorEmptyPassword = MutableLiveData<Boolean>()
+
+    val errorEmptyPassword: LiveData<Boolean>
+        get() = _errorEmptyPassword
 
     private val _errorToastUsername = MutableLiveData<Boolean>()
     val errorToastUsername: LiveData<Boolean>
@@ -51,7 +52,8 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
 
     fun showUserListFragment() {
         if (inputUserName.value == null || inputPassword.value == null) {
-            _emptyFieldsError.value = true
+            if (inputUserName.value == null) _errorEmptyLogin.value = true
+            if (inputPassword.value == null) _errorEmptyPassword.value = true
         } else {
             uiScope.launch {
                 val userName = repository.getUserName(inputUserName.value!!)
@@ -72,10 +74,6 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
 
     fun doneNavigationToUserDetails() {
         _acceptNavigation.value = false
-    }
-
-    fun checkedEmptyFields() {
-        _emptyFieldsError.value = false
     }
 
     fun doneNotifyNickNameError() {
