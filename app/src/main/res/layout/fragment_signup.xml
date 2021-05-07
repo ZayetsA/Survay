@@ -38,7 +38,7 @@
             android:paddingEnd="10dp"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
-            app:errorMessage="@{viewModel.errorEmptyFirstName}"
+            app:errorMessage="@{viewModel.errorFirstName}"
             app:layout_constraintEnd_toStartOf="@id/signupContainerInputLastNameLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signupContainerTitle"
@@ -55,7 +55,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputFirstName}"
+                android:text="@={viewModel.model.firstName}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,7 +67,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
-            app:errorMessage="@{viewModel.errorEmptySecondName}"
+            app:errorMessage="@{viewModel.errorSecondName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/signupContainerInputFirstNameLayout"
             app:layout_constraintTop_toBottomOf="@id/signupContainerTitle"
@@ -82,7 +82,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputLastName}"
+                android:text="@={viewModel.model.secondName}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -95,7 +95,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
-            app:errorMessage="@{viewModel.errorEmptyLogin}"
+            app:errorMessage="@{viewModel.errorLogin}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signupContainerInputLastNameLayout">
 
@@ -108,7 +108,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputUserLogin}"
+                android:text="@={viewModel.model.login}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -120,7 +120,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
-            app:errorMessage="@{viewModel.errorEmptyPassword}"
+            app:errorMessage="@{viewModel.errorPassword}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signupContainerInputLoginLayout">
 
@@ -134,7 +134,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputPassword}"
+                android:text="@={viewModel.model.password}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +146,7 @@
             android:layout_marginTop="@dimen/margin_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
-            app:errorMessage="@{viewModel.errorEmptyPasswordConfirmation}"
+            app:errorMessage="@{viewModel.errorPasswordConfirmation}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signupContainerInputPasswordLayout">
 
@@ -161,7 +161,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputPasswordConfirmation}"
+                android:text="@={viewModel.model.passwordConfirmation}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>

@@ -9,24 +9,24 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     fragmentManager,
     BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
-    private var fragmentList1: ArrayList<Fragment> = ArrayList()
-    private var fragmentTitleList1: ArrayList<String> = ArrayList()
+    private var fragmentList: ArrayList<Fragment> = ArrayList()
+    private var fragmentTitleList: ArrayList<String> = ArrayList()
 
     override fun getItem(position: Int): Fragment {
-        return fragmentList1[position]
+        return fragmentList[position]
     }
 
     @Nullable
     override fun getPageTitle(position: Int): CharSequence {
-        return fragmentTitleList1[position]
+        return fragmentTitleList[position]
     }
 
     override fun getCount(): Int {
-        return fragmentList1.size
+        return fragmentList.size
     }
 
     fun addFragment(fragment: Fragment, title: String) {
-        fragmentList1.add(fragment)
-        fragmentTitleList1.add(title)
+        fragmentList.add(fragment)
+        fragmentTitleList.add(title)
     }
 }

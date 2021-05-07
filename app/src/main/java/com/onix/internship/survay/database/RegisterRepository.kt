@@ -1,8 +1,9 @@
 package com.onix.internship.survay.database
 
 class RegisterRepository(private val dao: DataBaseDao) {
-    val usersAndMentors = dao.getUsersAndMentors()
-
+    suspend fun getUsersAndMentors(): List<User> {
+        return dao.getUsersAndMentors()
+    }
 
     suspend fun insert(user: User) {
         return dao.insert(user)
