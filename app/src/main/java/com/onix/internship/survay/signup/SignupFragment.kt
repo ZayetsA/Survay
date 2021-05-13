@@ -1,6 +1,5 @@
 package com.onix.internship.survay.signup
 
-import android.app.Application
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,17 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.onix.internship.survay.R
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.onix.internship.survay.adapter.errorMessage
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.UserDatabase
 import com.onix.internship.survay.databinding.FragmentSignupBinding
 import com.onix.internship.survay.util.ErrorsCatcher
-import com.onix.internship.survay.util.SuccessDialogFragment
 
 class SignupFragment : Fragment() {
 
-    private lateinit var signupViewModel: SignupViewModel
+    private val signupViewModel: SignupViewModel by viewModels {
+        SignUpViewModelFactory(
+            RegisterRepository(UserDatabase.getInstance(requireContext()).userDatabaseDao)
+        )
+    }
     private lateinit var binding: FragmentSignupBinding
 
     override fun onCreateView(
@@ -27,32 +30,15 @@ class SignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSignupBinding.inflate(inflater)
-        val application: Application = requireNotNull(this.activity).application
-        val dao = UserDatabase.getInstance(application).userDatabaseDao
-        val repository = RegisterRepository(dao)
-        val factory = SignUpViewModelFactory(repository, application)
-        val viewModel: SignupViewModel by viewModels { factory }
-        signupViewModel = viewModel
-        errorsNotificationListener()
         removeErrorsDisplayingListener()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = signupViewModel
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun errorsNotificationListener() {
-        signupViewModel.navigate.observe(viewLifecycleOwner, { hasFinished ->
-            if (hasFinished == true) {
-                val myDialogFragment = SuccessDialogFragment()
-                val manager = requireActivity().supportFragmentManager
-                myDialogFragment.show(manager, getString(R.string.success_dialog_tag))
-                signupViewModel.doneNavigating()
-            }
-        })
+        signupViewModel.navigationEvent.observe(viewLifecycleOwner, ::navigate)
     }
 
     private fun removeErrorsDisplayingListener() {
@@ -116,5 +102,9 @@ class SignupFragment : Fragment() {
                 binding.signupContainerInputPasswordConfirmationLayout.errorMessage(ErrorsCatcher.NO)
             }
         })
+    }
+
+    private fun navigate(direction: NavDirections) {
+        findNavController().navigate(direction)
     }
 }

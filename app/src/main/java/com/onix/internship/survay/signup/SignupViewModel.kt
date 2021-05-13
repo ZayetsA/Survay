@@ -1,31 +1,27 @@
 package com.onix.internship.survay.signup
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.User
+import com.onix.internship.survay.tab.TabFragmentDirections
 import com.onix.internship.survay.util.ErrorsCatcher
 import com.onix.internship.survay.util.MD5
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.onix.internship.survay.util.SingleLiveEvent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class SignupViewModel(private val repository: RegisterRepository, application: Application) :
-    AndroidViewModel(application) {
+class SignupViewModel(private val repository: RegisterRepository) : ViewModel() {
 
     val model = SignupModel()
 
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val mD5 = MD5()
+    private val _navigationEvent = SingleLiveEvent<NavDirections>()
+    val navigationEvent: LiveData<NavDirections> = _navigationEvent
 
-    private val _navigate = MutableLiveData<Boolean>()
-    val navigate: LiveData<Boolean>
-        get() = _navigate
+    private val mD5 = MD5()
 
     private val _errorFirstName = MutableLiveData(ErrorsCatcher.NO)
     val errorFirstName: LiveData<ErrorsCatcher>
@@ -55,7 +51,7 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
             _errorPassword.value = isEmptyEditText(password)
             _errorPasswordConfirmation.value = isEmptyEditText(passwordConfirmation)
             if (!isEmpty()) {
-                uiScope.launch {
+                viewModelScope.launch {
                     val username = repository.getUserName(login)
                     if (username != null) {
                         _errorLogin.value = ErrorsCatcher.EXISTING_LOGIN
@@ -80,7 +76,7 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
                                 login = ""
                                 password = ""
                                 passwordConfirmation = ""
-                                _navigate.value = true
+                                _navigationEvent.postValue(TabFragmentDirections.actionTabFragmentToUserList2())
                             }
                         }
                     }
@@ -91,9 +87,5 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
 
     private fun insert(user: User): Job = viewModelScope.launch {
         repository.insert(user)
-    }
-
-    fun doneNavigating() {
-        _navigate.value = false
     }
 }

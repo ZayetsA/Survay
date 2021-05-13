@@ -1,6 +1,5 @@
 package com.onix.internship.survay.userlist
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +8,7 @@ import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.User
 import kotlinx.coroutines.launch
 
-class UserListViewModel(private val repository: RegisterRepository, application: Application) :
-    ViewModel() {
+class UserListViewModel(private val repository: RegisterRepository) : ViewModel() {
 
     private var _usersAndMentors = MutableLiveData<List<User>>()
     val usersAndMentors: LiveData<List<User>>

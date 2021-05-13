@@ -1,26 +1,25 @@
 package com.onix.internship.survay.login
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
+import com.onix.internship.survay.tab.TabFragmentDirections
 import com.onix.internship.survay.util.ErrorsCatcher
 import com.onix.internship.survay.util.MD5
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import com.onix.internship.survay.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: RegisterRepository, application: Application) :
-    AndroidViewModel(application) {
+class LoginViewModel(private val repository: RegisterRepository) : ViewModel() {
 
     var model = LoginModel()
 
-    private val mD5 = MD5()
+    private val _navigationEvent = SingleLiveEvent<NavDirections>()
+    val navigationEvent: LiveData<NavDirections> = _navigationEvent
 
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val mD5 = MD5()
 
     private val _errorLogin = MutableLiveData(ErrorsCatcher.NO)
 
@@ -32,22 +31,18 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
     val errorPassword: LiveData<ErrorsCatcher>
         get() = _errorPassword
 
-    private val _acceptNavigation = MutableLiveData<Boolean>()
-    val acceptNavigation: LiveData<Boolean>
-        get() = _acceptNavigation
-
     fun showUserListFragment() {
         model.apply {
             _errorLogin.value = isEmptyEditText(login)
             _errorPassword.value = isEmptyEditText(password)
             if (!isEmpty()) {
-                uiScope.launch {
+                viewModelScope.launch {
                     val userLogin = repository.getUserName(login)
                     if (userLogin != null) {
                         if (userLogin.password == mD5.md5(password)) {
                             login = ""
                             password = ""
-                            _acceptNavigation.value = true
+                            _navigationEvent.postValue(TabFragmentDirections.actionTabFragmentToUserList2())
                         } else {
                             _errorPassword.value = ErrorsCatcher.INCORRECT_PASSWORD
                         }
@@ -59,7 +54,4 @@ class LoginViewModel(private val repository: RegisterRepository, application: Ap
         }
     }
 
-    fun doneNavigationToUserDetails() {
-        _acceptNavigation.value = false
-    }
 }

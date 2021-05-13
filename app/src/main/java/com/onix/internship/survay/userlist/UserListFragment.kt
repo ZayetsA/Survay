@@ -14,7 +14,11 @@ import com.onix.internship.survay.database.UserDatabase
 import com.onix.internship.survay.databinding.FragmentUserListBinding
 
 class UserListFragment : Fragment() {
-    private lateinit var userListViewModel: UserListViewModel
+    private val userListViewModel: UserListViewModel by viewModels {
+        UserListViewModelFactory(
+            RegisterRepository(UserDatabase.getInstance(requireContext()).userDatabaseDao)
+        )
+    }
     private lateinit var binding: FragmentUserListBinding
 
     override fun onCreateView(
@@ -22,12 +26,6 @@ class UserListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentUserListBinding.inflate(inflater)
-        val application = requireNotNull(this.activity).application
-        val dao = UserDatabase.getInstance(application).userDatabaseDao
-        val repository = RegisterRepository(dao)
-        val factory = UserListViewModelFactory(repository, application)
-        val viewModel: UserListViewModel by viewModels { factory }
-        userListViewModel = viewModel
         navigationObserver()
         initRecyclerView()
         return binding.root

@@ -14,12 +14,15 @@ import com.onix.internship.survay.adapter.errorMessage
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.UserDatabase
 import com.onix.internship.survay.databinding.FragmentLoginBinding
-import com.onix.internship.survay.tab.TabFragmentDirections
 import com.onix.internship.survay.util.ErrorsCatcher
 
 class LoginFragment : Fragment() {
 
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(
+            RegisterRepository(UserDatabase.getInstance(requireContext()).userDatabaseDao)
+        )
+    }
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
@@ -27,21 +30,15 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater)
-        val application = requireNotNull(this.activity).application
-        val dao = UserDatabase.getInstance(application).userDatabaseDao
-        val repository = RegisterRepository(dao)
-        val factory = LoginViewModelFactory(repository, application)
-        val viewModel: LoginViewModel by viewModels { factory }
-        loginViewModel = viewModel
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = loginViewModel
         removeErrorsDisplayingListener()
-        navigationListener()
-        super.onViewCreated(view, savedInstanceState)
+        loginViewModel.navigationEvent.observe(viewLifecycleOwner, ::navigate)
     }
 
     private fun removeErrorsDisplayingListener() {
@@ -68,20 +65,6 @@ class LoginFragment : Fragment() {
                 binding.loginContainerInputLoginLayout.errorMessage(ErrorsCatcher.NO)
             }
         })
-    }
-
-    private fun navigationListener() {
-        loginViewModel.acceptNavigation.observe(viewLifecycleOwner, { hasFinished ->
-            if (hasFinished == true) {
-                navigateUserDetails()
-                loginViewModel.doneNavigationToUserDetails()
-            }
-        })
-    }
-
-    private fun navigateUserDetails() {
-        val action = TabFragmentDirections.actionTabFragmentToUserList2()
-        navigate(action)
     }
 
     private fun navigate(direction: NavDirections) {
