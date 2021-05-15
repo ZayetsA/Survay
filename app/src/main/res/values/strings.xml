@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Survay</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_tab_description">Login</string>
     <string name="register_tab_description">Register</string>
     <string name="signupContainerTitleText">Welcome</string>
@@ -13,4 +12,16 @@
     <string name="loginContainerTitleText">Hello</string>
     <string name="buttonConnectText">Connect</string>
     <string name="default_description">some text</string>
+    <string name="error_empty_fields">Field can not be empty!</string>
+    <string name="existing_username_error">This username is already taken!</string>
+    <string name="match_passwords_error">Passwords did not match!</string>
+    <string name="short_password_error">Passwords are too easy!</string>
+    <string name="error_existing_username">This name is already in use!</string>
+    <string name="invalid_password_error">Please check your Password</string>
+    <string name="success_dialog_tag">successDialog</string>
+    <string name="success_login_title">Вы успешно зарегистрированы в системе!</string>
+    <string name="success_login_advice">Пожалуйста, выполните вход</string>
+    <string name="success_login_positive_button_text">OK</string>
+    <string name="user_list_fragment_toolbar_title">Users</string>
+    <string name="invalid_login_error">No such user! Please, sign up first!</string>
 </resources>

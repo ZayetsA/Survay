@@ -6,7 +6,7 @@
         android:id="@+id/userItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_5"
+        android:layout_margin="@dimen/layout_margin_5"
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
@@ -28,7 +28,7 @@
                     android:id="@+id/userItemFirstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginStart="@dimen/user_item_title_margin_10"
                     android:text="@string/default_description"
                     android:textColor="@color/tab_color_unselected"
                     android:textSize="@dimen/text_24"
@@ -40,7 +40,7 @@
                     android:id="@+id/userItemSecondName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_5"
+                    android:layout_marginStart="@dimen/user_item_subtitle_margin_5"
                     android:text="@string/default_description"
                     android:textColor="@color/tab_color_unselected"
                     android:textSize="@dimen/text_24"
@@ -52,8 +52,8 @@
                     android:id="@+id/userItemUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginStart="@dimen/user_item_title_margin_10"
+                    android:layout_marginTop="@dimen/user_item_subtitle_margin_5"
                     android:text="@string/default_description"
                     android:textColor="@color/tab_color_selected"
                     android:textSize="@dimen/text_16"
@@ -65,14 +65,14 @@
                     android:id="@+id/userItemUserRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginStart="@dimen/user_item_title_margin_10"
+                    android:layout_marginTop="@dimen/user_item_subtitle_margin_5"
                     android:text="@string/default_description"
                     android:textColor="@color/tab_color_selected"
                     android:textSize="@dimen/text_16"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/userItemUsername"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/userItemUsername" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"

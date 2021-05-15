@@ -15,7 +15,7 @@
         android:id="@+id/loginContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_30"
+        android:layout_margin="@dimen/container_margin_30"
         tools:context=".login.LoginFragment">
 
         <com.google.android.material.textview.MaterialTextView
@@ -32,9 +32,10 @@
             android:id="@+id/loginContainerInputLoginLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorLogin}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginContainerTitle">
 
@@ -42,13 +43,13 @@
                 android:id="@+id/loginContainerInputLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginTop="@dimen/edit_text_margin_top_30"
                 android:hint="@string/signupContainerLoginInputHint"
                 android:maxLength="30"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputUserName}"
+                android:text="@={viewModel.model.login}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -57,9 +58,10 @@
             android:id="@+id/loginContainerInputPasswordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorPassword}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginContainerInputLoginLayout">
 
@@ -67,14 +69,14 @@
                 android:id="@+id/loginContainerInputPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginTop="@dimen/edit_text_margin_top_30"
                 android:hint="@string/signupContainerPasswordInputHint"
                 android:inputType="textPassword"
                 android:maxLength="15"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.inputPassword}"
+                android:text="@={viewModel.model.password}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,10 +85,10 @@
             android:id="@+id/loginContainerSubmitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_30"
+            android:layout_marginTop="@dimen/connect_btn_margin_top_30"
             android:onClick="@{() -> viewModel.showUserListFragment()}"
-            android:paddingStart="@dimen/padding_40"
-            android:paddingEnd="@dimen/padding_40"
+            android:paddingStart="@dimen/apply_button_padding_40"
+            android:paddingEnd="@dimen/apply_button_padding_40"
             android:text="@string/buttonConnectText"
             android:textSize="@dimen/text_16"
             app:layout_constraintEnd_toEndOf="parent"

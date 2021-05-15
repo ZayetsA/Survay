@@ -1,89 +1,84 @@
 package com.onix.internship.survay.signup
 
-import android.app.Application
-import androidx.databinding.Bindable
-import androidx.databinding.Observable
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
 import com.onix.internship.survay.database.User
+import com.onix.internship.survay.tab.TabFragmentDirections
+import com.onix.internship.survay.util.ErrorsCatcher
 import com.onix.internship.survay.util.MD5
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.onix.internship.survay.util.SingleLiveEvent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class SignupViewModel(private val repository: RegisterRepository, application: Application) :
-    AndroidViewModel(application), Observable {
+class SignupViewModel(private val repository: RegisterRepository) : ViewModel() {
 
-    @Bindable
-    val inputFirstName = MutableLiveData<String>()
+    val model = SignupModel()
 
-    @Bindable
-    val inputLastName = MutableLiveData<String>()
+    private val _navigationEvent = SingleLiveEvent<NavDirections>()
+    val navigationEvent: LiveData<NavDirections> = _navigationEvent
 
-    @Bindable
-    val inputUserLogin = MutableLiveData<String>()
-
-    @Bindable
-    val inputPassword = MutableLiveData<String>()
-
-    @Bindable
-    val inputPasswordConfirmation = MutableLiveData<String>()
-
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val mD5 = MD5()
 
-    private val _navigate = MutableLiveData<Boolean>()
-    val navigate: LiveData<Boolean>
-        get() = _navigate
+    private val _errorFirstName = MutableLiveData(ErrorsCatcher.NO)
+    val errorFirstName: LiveData<ErrorsCatcher>
+        get() = _errorFirstName
 
-    private val _errorToast = MutableLiveData<Boolean>()
+    private val _errorSecondName = MutableLiveData(ErrorsCatcher.NO)
+    val errorSecondName: LiveData<ErrorsCatcher>
+        get() = _errorSecondName
 
-    val errorToast: LiveData<Boolean>
-        get() = _errorToast
+    private val _errorLogin = MutableLiveData(ErrorsCatcher.NO)
+    val errorLogin: LiveData<ErrorsCatcher>
+        get() = _errorLogin
 
-    private val _errorToastUsername = MutableLiveData<Boolean>()
+    private val _errorPassword = MutableLiveData(ErrorsCatcher.NO)
+    val errorPassword: LiveData<ErrorsCatcher>
+        get() = _errorPassword
 
-    val errorToastUsername: LiveData<Boolean>
-        get() = _errorToastUsername
-
-    private val _errorToastPassword = MutableLiveData<Boolean>()
-
-    val errorToastPassword: LiveData<Boolean>
-        get() = _errorToastPassword
+    private val _errorPasswordConfirmation = MutableLiveData(ErrorsCatcher.NO)
+    val errorPasswordConfirmation: LiveData<ErrorsCatcher>
+        get() = _errorPasswordConfirmation
 
     fun showLoginFragment() {
-        if (checkError()) {
-            _errorToast.value = true
-        } else {
-            uiScope.launch {
-                val userName = inputUserLogin.value?.let { repository.getUserName(it) }
-                if (userName != null) {
-                    _errorToastUsername.value = true
-                } else {
-                    if (inputPassword.value != inputPasswordConfirmation.value) {
-                        _errorToastPassword.value = true
+        model.apply {
+            _errorFirstName.value = isEmptyEditText(firstName)
+            _errorSecondName.value = isEmptyEditText(secondName)
+            _errorLogin.value = isEmptyEditText(login)
+            _errorPassword.value = isEmptyEditText(password)
+            _errorPasswordConfirmation.value = isEmptyEditText(passwordConfirmation)
+            if (!isEmpty()) {
+                viewModelScope.launch {
+                    val username = repository.getUserName(login)
+                    if (username != null) {
+                        _errorLogin.value = ErrorsCatcher.EXISTING_LOGIN
                     } else {
-                        val firstName = inputFirstName.value!!
-                        val lastName = inputLastName.value!!
-                        val userLogin = inputUserLogin.value!!
-                        val password = mD5.md5(inputPassword.value!!)
-                        val role: Int = if (repository.getNumUsers() == 0) {
-                            0
+                        if (password != passwordConfirmation) {
+                            _errorPassword.value = ErrorsCatcher.PASSWORD_MATCH_ERROR
+                            _errorPasswordConfirmation.value = ErrorsCatcher.PASSWORD_MATCH_ERROR
                         } else {
-                            1
+                            if (password.length < 6) {
+                                _errorPassword.value = ErrorsCatcher.EASY_PASSWORD
+                                _errorPasswordConfirmation.value = ErrorsCatcher.EASY_PASSWORD
+                            } else {
+                                val hashedPassword = mD5.md5(password)
+                                val role: Int = if (repository.getNumUsers() == 0) {
+                                    0
+                                } else {
+                                    1
+                                }
+                                insert(User(0, firstName, secondName, login, hashedPassword, role))
+                                firstName = ""
+                                secondName = ""
+                                login = ""
+                                password = ""
+                                passwordConfirmation = ""
+                                _navigationEvent.postValue(TabFragmentDirections.actionTabFragmentToUserList2())
+                            }
                         }
-                        insert(User(0, firstName, lastName, userLogin, password, role))
-                        inputFirstName.value = null
-                        inputLastName.value = null
-                        inputUserLogin.value = null
-                        inputPassword.value = null
-                        inputPasswordConfirmation.value = null
-                        _navigate.value = true
                     }
                 }
             }
@@ -92,31 +87,5 @@ class SignupViewModel(private val repository: RegisterRepository, application: A
 
     private fun insert(user: User): Job = viewModelScope.launch {
         repository.insert(user)
-    }
-
-    fun doneNavigating() {
-        _navigate.value = false
-    }
-
-    fun doneNotificationUserName() {
-        _errorToastUsername.value = false
-    }
-
-    fun doneToast() {
-        _errorToast.value = false
-    }
-
-    fun donePasswordNotification() {
-        _errorToastPassword.value = false
-    }
-
-    private fun checkError(): Boolean {
-        return inputFirstName.value == null || inputLastName.value == null || inputUserLogin.value == null || inputPassword.value == null || inputPasswordConfirmation.value == null
-    }
-
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-    }
-
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
     }
 }

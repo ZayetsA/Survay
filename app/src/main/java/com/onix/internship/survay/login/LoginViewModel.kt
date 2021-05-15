@@ -1,94 +1,57 @@
 package com.onix.internship.survay.login
 
-import android.app.Application
-import androidx.databinding.Bindable
-import androidx.databinding.Observable
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.RegisterRepository
-import com.onix.internship.survay.events.SingleLiveEvent
+import com.onix.internship.survay.tab.TabFragmentDirections
+import com.onix.internship.survay.util.ErrorsCatcher
 import com.onix.internship.survay.util.MD5
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import com.onix.internship.survay.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: RegisterRepository, application: Application) :
-    AndroidViewModel(application), Observable {
+class LoginViewModel(private val repository: RegisterRepository) : ViewModel() {
 
-    private val _navigationLiveEvent = SingleLiveEvent<NavDirections>()
-    val navigationLiveEvent: LiveData<NavDirections> = _navigationLiveEvent
-    val users = repository.allUsers
+    var model = LoginModel()
+
+    private val _navigationEvent = SingleLiveEvent<NavDirections>()
+    val navigationEvent: LiveData<NavDirections> = _navigationEvent
+
     private val mD5 = MD5()
 
-    @Bindable
-    val inputUserName = MutableLiveData<String>()
+    private val _errorLogin = MutableLiveData(ErrorsCatcher.NO)
 
-    @Bindable
-    val inputPassword = MutableLiveData<String>()
+    val errorLogin: LiveData<ErrorsCatcher>
+        get() = _errorLogin
 
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val _errorPassword = MutableLiveData(ErrorsCatcher.NO)
 
-    private val _emptyFieldsError = MutableLiveData<Boolean>()
-    val emptyFieldsError: LiveData<Boolean>
-        get() = _emptyFieldsError
-
-    private val _errorToastUsername = MutableLiveData<Boolean>()
-    val errorToastUsername: LiveData<Boolean>
-        get() = _errorToastUsername
-
-    private val _errorToastInvalidPassword = MutableLiveData<Boolean>()
-    val errorToastInvalidPassword: LiveData<Boolean>
-        get() = _errorToastInvalidPassword
-
-    private val _acceptNavigation = MutableLiveData<Boolean>()
-    val acceptNavigation: LiveData<Boolean>
-        get() = _acceptNavigation
-
+    val errorPassword: LiveData<ErrorsCatcher>
+        get() = _errorPassword
 
     fun showUserListFragment() {
-        if (inputUserName.value == null || inputPassword.value == null) {
-            _emptyFieldsError.value = true
-        } else {
-            uiScope.launch {
-                val userName = repository.getUserName(inputUserName.value!!)
-                if (userName != null) {
-                    if (userName.password == mD5.md5(inputPassword.value!!)) {
-                        inputUserName.value = null
-                        inputPassword.value = null
-                        _acceptNavigation.value = true
+        model.apply {
+            _errorLogin.value = isEmptyEditText(login)
+            _errorPassword.value = isEmptyEditText(password)
+            if (!isEmpty()) {
+                viewModelScope.launch {
+                    val userLogin = repository.getUserName(login)
+                    if (userLogin != null) {
+                        if (userLogin.password == mD5.md5(password)) {
+                            login = ""
+                            password = ""
+                            _navigationEvent.postValue(TabFragmentDirections.actionTabFragmentToUserList2())
+                        } else {
+                            _errorPassword.value = ErrorsCatcher.INCORRECT_PASSWORD
+                        }
                     } else {
-                        _errorToastInvalidPassword.value = true
+                        _errorLogin.value = ErrorsCatcher.INCORRECT_LOGIN
                     }
-                } else {
-                    _errorToastUsername.value = true
                 }
             }
         }
     }
 
-    fun doneNavigationToUserDetails() {
-        _acceptNavigation.value = false
-    }
-
-    fun checkedEmptyFields() {
-        _emptyFieldsError.value = false
-    }
-
-    fun doneNotifyNickNameError() {
-        _errorToastUsername.value = false
-    }
-
-    fun doneNotifyPasswordError() {
-        _errorToastInvalidPassword.value = false
-    }
-
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-    }
-
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-    }
 }
