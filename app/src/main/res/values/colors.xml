@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="tab_color_selected">#52B1A7</color>
     <color name="tab_color_unselected">#159688</color>
+    <color name="color_gray">#7a8089</color>
 </resources>

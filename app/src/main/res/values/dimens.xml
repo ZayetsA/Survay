@@ -12,4 +12,7 @@
     <dimen name="user_item_title_margin_10">10dp</dimen>
     <dimen name="user_item_subtitle_margin_5">5dp</dimen>
     <dimen name="layout_margin_5">5dp</dimen>
+    <dimen name="option_text_18">18sp</dimen>
+    <dimen name="progress_text_14">14sp</dimen>
+    <dimen name="progress_bar_min_height_50">50dp</dimen>
 </resources>

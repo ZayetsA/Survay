@@ -1,43 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/tabFragment">
     <fragment
         android:id="@+id/tabFragment"
-        android:name="com.onix.internship.survay.tab.TabFragment"
+        android:name="com.onix.internship.survay.ui.tab.TabFragment"
         android:label="TabFragment" >
         <action
-            android:id="@+id/action_tabFragment_to_userList2"
-            app:destination="@id/userList" />
+            android:id="@+id/action_tabFragment_to_admin"
+            app:destination="@id/admin" />
         <action
-            android:id="@+id/action_tabFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_tabFragment_self"
+            app:destination="@id/tabFragment" />
         <action
-            android:id="@+id/action_tabFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_tabFragment_to_studentFragment"
+            app:destination="@id/studentFragment" />
+        <action
+            android:id="@+id/action_tabFragment_to_managerFragment"
+            app:destination="@id/managerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.onix.internship.survay.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:id="@+id/admin"
+        android:name="com.onix.internship.survay.ui.admin.AdminFragment"
+        android:label="admin">
         <action
-            android:id="@+id/action_loginFragment_to_userList3"
-            app:destination="@id/userList" />
+            android:id="@+id/action_admin_to_tabFragment"
+            app:destination="@id/tabFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.onix.internship.survay.signup.SignupFragment"
-        android:label="SignupFragment" >
+        android:id="@+id/studentFragment"
+        android:name="com.onix.internship.survay.ui.student.list.StudentFragment"
+        android:label="StudentFragment" >
         <action
-            android:id="@+id/action_signupFragment_to_userList2"
-            app:destination="@id/userList" />
+            android:id="@+id/action_studentFragment_to_tabFragment"
+            app:destination="@id/tabFragment" />
+        <action
+            android:id="@+id/action_studentFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
-        android:id="@+id/userList"
-        android:name="com.onix.internship.survay.userlist.UserListFragment"
-        android:label="UserList" >
+        android:id="@+id/quizFragment"
+        android:name="com.onix.internship.survay.ui.student.quiz.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
         <action
-            android:id="@+id/action_userList_to_tabFragment"
+            android:id="@+id/action_quizFragment_to_studentFragment"
+            app:destination="@id/studentFragment" />
+        <action
+            android:id="@+id/action_quizFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+        <argument
+            android:name="testId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.onix.internship.survay.ui.student.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_studentFragment"
+            app:destination="@id/studentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/managerFragment"
+        android:name="com.onix.internship.survay.ui.manager.ManagerFragment"
+        android:label="fragment_manager"
+        tools:layout="@layout/fragment_manager" >
+        <action
+            android:id="@+id/action_managerFragment_to_tabFragment"
             app:destination="@id/tabFragment" />
     </fragment>
 </navigation>

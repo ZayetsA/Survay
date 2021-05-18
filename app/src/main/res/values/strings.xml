@@ -24,4 +24,10 @@
     <string name="success_login_positive_button_text">OK</string>
     <string name="user_list_fragment_toolbar_title">Users</string>
     <string name="invalid_login_error">No such user! Please, sign up first!</string>
+    <string name="test_list_fragment_toolbar_title">Tests</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="some_great_image">some great image</string>
+    <string name="button_end_test_text">НА главную!</string>
+    <string name="title_congrats_text">Поздравляю,</string>
+
 </resources>

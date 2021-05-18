@@ -7,14 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.onix.internship.survay.tab.TabViewModel" />
+            type="com.onix.internship.survay.ui.tab.TabViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".tab.TabFragment">
+        android:layout_height="match_parent">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/mainContainer"

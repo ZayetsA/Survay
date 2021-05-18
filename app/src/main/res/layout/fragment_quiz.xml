@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onix.internship.survay.ui.student.quiz.QuizViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/questionsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/container_margin_30">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@{viewModel.testQuestion}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_24"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/questionsProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="false"
+            android:max="@{viewModel.testProgressBarMaxValue}"
+            android:minHeight="@dimen/progress_bar_min_height_50"
+            android:progress="@{viewModel.testProgressBarState}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionText" />
+
+        <TextView
+            android:id="@+id/progressBarProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewModel.testProgressBarText}"
+            android:textSize="@dimen/progress_text_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionsProgressBar" />
+
+        <TextView
+            android:id="@+id/questionOption_1"
+            backgroundChecked="@{viewModel.isItem1Clicked}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/default_option_bg"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.onItem1Click()}"
+            android:padding="15dp"
+            android:text="@{viewModel.testOptionFirst}"
+            android:textColor="@color/color_gray"
+            android:textSize="@dimen/option_text_18"
+            app:layout_constraintTop_toBottomOf="@id/progressBarProgressText" />
+
+        <TextView
+            android:id="@+id/questionOption_2"
+            backgroundChecked="@{viewModel.isItem2Clicked}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/default_option_bg"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.onItem2Click()}"
+            android:padding="15dp"
+            android:text="@{viewModel.testOptionSecond}"
+            android:textColor="@color/color_gray"
+            android:textSize="@dimen/option_text_18"
+            app:layout_constraintTop_toBottomOf="@id/questionOption_1" />
+
+        <TextView
+            android:id="@+id/questionOption_3"
+            backgroundChecked="@{viewModel.isItem3Clicked}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/default_option_bg"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.onItem3Click()}"
+            android:padding="15dp"
+            android:text="@{viewModel.testOptionThird}"
+            android:textColor="@color/color_gray"
+            android:textSize="@dimen/option_text_18"
+            app:layout_constraintTop_toBottomOf="@id/questionOption_2" />
+
+        <TextView
+            android:id="@+id/questionOption_4"
+            backgroundChecked="@{viewModel.isItem4Clicked}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/default_option_bg"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.onItem4Click()}"
+            android:padding="15dp"
+            android:text="@{viewModel.testOptionFourth}"
+            android:textColor="@color/color_gray"
+            android:textSize="@dimen/option_text_18"
+            app:layout_constraintTop_toBottomOf="@id/questionOption_3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_submit"
+            isActiveButton="@{viewModel.userResult}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="@{() -> viewModel.onSubmitClick()}"
+            android:padding="16dp"
+            android:text="@string/buttonSubmitText"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionOption_4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

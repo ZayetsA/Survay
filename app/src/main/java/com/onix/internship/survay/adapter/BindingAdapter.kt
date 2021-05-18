@@ -1,5 +1,8 @@
 package com.onix.internship.survay.adapter
 
+import android.annotation.SuppressLint
+import android.widget.Button
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.onix.internship.survay.R
@@ -16,4 +19,19 @@ fun TextInputLayout.errorMessage(errorType: ErrorsCatcher) {
         ErrorsCatcher.EXISTING_LOGIN -> context.getString(R.string.error_existing_username)
         ErrorsCatcher.EASY_PASSWORD -> context.getString(R.string.short_password_error)
     }
+}
+
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter("backgroundChecked")
+fun TextView.editBackground(isPressed: Boolean) {
+    background = if (isPressed) {
+        resources.getDrawable(R.drawable.selected_option_bg)
+    } else {
+        resources.getDrawable(R.drawable.default_option_bg)
+    }
+}
+
+@BindingAdapter("isActiveButton")
+fun Button.setupActive(userChoice: String?) {
+    isEnabled = userChoice?.isNotEmpty() ?: false
 }
