@@ -18,14 +18,14 @@ class StudentViewModel(private val database: SurvayDatabase) : ViewModel(),
     val test: LiveData<List<Tests>>
         get() = getTestList()
 
-//    init {
-//        insertTest1()
-//        insertQuestion1()
-//        insertAnswers1()
-//////        insertTest2()
-//////        insertQuestion2()
-////        insertAnswers2()
-//    }
+    init {
+        insertTest1()
+        insertQuestion1()
+        insertAnswers1()
+////        insertTest2()
+////        insertQuestion2()
+//        insertAnswers2()
+    }
 
     private val _navigationEvent = SingleLiveEvent<NavDirections>()
     val navigationEvent: LiveData<NavDirections> = _navigationEvent
@@ -73,13 +73,13 @@ class StudentViewModel(private val database: SurvayDatabase) : ViewModel(),
 
     private fun insertQuestion2() {
         viewModelScope.launch {
-            database.questionDao.insert(Question(0, 1, "What is sex?"))
+            database.questionDao.insert(Question(0, 1, "What is rock?"))
         }
     }
 
     private fun insertAnswers2() {
         viewModelScope.launch {
-            database.answerDao.insert(Answer(0, 0, 1, "sexx", "sex", "xex", "dgdg", "sex"))
+            database.answerDao.insert(Answer(0, 0, 1, "Nice music", "sex", "drugs", "rock n roll", "drugs"))
         }
     }
 }

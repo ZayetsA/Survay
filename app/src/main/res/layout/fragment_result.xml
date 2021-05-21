@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Вы прошли тест!"
+            android:text="@string/result_fragment_title"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -57,12 +57,12 @@
 
         <TextView
             android:id="@+id/tv_score"
+            setResultText="@{viewModel.model.userResult}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="#ff25ee"
             android:padding="10dp"
-            android:text="@{viewModel.model.userResult}"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -155,7 +155,7 @@ class QuizViewModel(private val database: SurvayDatabase, testId: Int) : ViewMod
                 model.questionList.first().question.testId,
                 score
             )
-            Log.d("SUKA1", result.toString())
+            Log.d("RESULT", result.toString())
             viewModelScope.launch {
                 database.resultDao.insert(result)
             }

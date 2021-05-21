@@ -26,8 +26,8 @@ class ResultViewModel(private val database: SurvayDatabase) : ViewModel() {
     init {
         viewModelScope.launch(Dispatchers.IO) {
             model.currentUser = database.authDao.getCurrentUser().user
-            val result = database.resultDao.getLatestResult()?.score
-            model.userResult = "You score is: $result"
+            val result = database.resultDao.getLatestResult().first().score
+            model.userResult = result.toString()
             _isDataLoading.postValue(false)
         }
     }

@@ -28,35 +28,16 @@ class AdminViewModel(private val database: SurvayDatabase) : ViewModel(),
         return _usersAndMentors
     }
 
-    override fun onCheckBoxClick(view: View, user: User) {
+    override fun onRoleChanged(view: View, user: User) {
         val checkBox = view as CheckBox
         if (checkBox.isChecked) {
             viewModelScope.launch {
-                database.userDatabaseDao.update(
-                    User(
-                        user.userId,
-                        user.firstName,
-                        user.lastName,
-                        user.login,
-                        user.password,
-                        UserRoleStates.MANAGER
-                    )
-                )
+                database.userDatabaseDao.updateUserRole(UserRoleStates.MANAGER, user.userId)
             }
         } else {
             viewModelScope.launch {
-                database.userDatabaseDao.update(
-                    User(
-                        user.userId,
-                        user.firstName,
-                        user.lastName,
-                        user.login,
-                        user.password,
-                        UserRoleStates.USER
-                    )
-                )
+                database.userDatabaseDao.updateUserRole(UserRoleStates.USER, user.userId)
             }
         }
     }
-
 }

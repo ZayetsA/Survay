@@ -40,8 +40,8 @@ class LoginViewModel(private val database: SurvayDatabase) : ViewModel() {
             if (!isEmpty()) {
                 viewModelScope.launch {
                     val userLogin = database.userDatabaseDao.getLogin(login)
-                    if (userLogin != null) {
-                        if (userLogin.password == mD5.md5(password)) {
+                    if (userLogin.isNotEmpty()) {
+                        if (userLogin.first().password == mD5.md5(password)) {
                             val userlist = database.userDatabaseDao.get(login, mD5.md5(password))
                             if (userlist.isNotEmpty()) {
                                 database.authDao.insert(
@@ -52,7 +52,7 @@ class LoginViewModel(private val database: SurvayDatabase) : ViewModel() {
                                 )
                                 login = ""
                                 password = ""
-                                navigateToRightFragment(userLogin.role)
+                                navigateToRightFragment(userLogin.first().role)
                             } else {
                                 _errorLogin.value = ErrorsCatcher.INCORRECT_LOGIN
                             }

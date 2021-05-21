@@ -15,8 +15,11 @@ interface ResultDao {
     suspend fun update(result: Result)
 
     @Query("SELECT * FROM results WHERE resultUserId =:userId AND resultTestId = :testId")
-    suspend fun getResult(userId: Int, testId: Int): Result?
+    suspend fun getResult(userId: Int, testId: Int): List<Result>
 
     @Query("SELECT * FROM results WHERE resultId = (SELECT MAX(resultId) FROM RESULTS)")
-    suspend fun getLatestResult(): Result?
+    suspend fun getLatestResult(): List<Result>
+
+    @Query("SELECT * FROM results")
+    suspend fun getAllResults(): List<Result>
 }

@@ -24,7 +24,7 @@ class UserListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(userList[position])
         holder.binding.userItemIsTester.setOnCheckedChangeListener { compoundButton: CompoundButton, b: Boolean ->
-            listener.onCheckBoxClick(holder.binding.userItemIsTester, userList[position])
+            listener.onRoleChanged(holder.binding.userItemIsTester, userList[position])
         }
     }
 

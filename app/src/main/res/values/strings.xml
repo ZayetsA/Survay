@@ -29,5 +29,10 @@
     <string name="some_great_image">some great image</string>
     <string name="button_end_test_text">НА главную!</string>
     <string name="title_congrats_text">Поздравляю,</string>
+    <string name="test_score_title">You score is: %1$s!</string>
+    <string name="result_fragment_title">Вы прошли тест!</string>
+    <string name="manager_page_title">Hi, manager!</string>
+    <string name="btn_to_results_text">Student results</string>
+    <string name="btn_to_test_list_text">Tests</string>
 
 </resources>

@@ -65,11 +65,34 @@
     </fragment>
     <fragment
         android:id="@+id/managerFragment"
-        android:name="com.onix.internship.survay.ui.manager.ManagerFragment"
+        android:name="com.onix.internship.survay.ui.manager.home.ManagerFragment"
         android:label="fragment_manager"
         tools:layout="@layout/fragment_manager" >
         <action
             android:id="@+id/action_managerFragment_to_tabFragment"
             app:destination="@id/tabFragment" />
+        <action
+            android:id="@+id/action_managerFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+        <action
+            android:id="@+id/action_managerFragment_to_testListFragment"
+            app:destination="@id/testListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.onix.internship.survay.ui.manager.results.ResultsFragment"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" >
+        <action
+            android:id="@+id/action_resultsFragment_to_managerFragment"
+            app:destination="@id/managerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testListFragment"
+        android:name="com.onix.internship.survay.ui.manager.tests.TestListFragment"
+        android:label="TestListFragment" >
+        <action
+            android:id="@+id/action_testListFragment_to_managerFragment"
+            app:destination="@id/managerFragment" />
     </fragment>
 </navigation>

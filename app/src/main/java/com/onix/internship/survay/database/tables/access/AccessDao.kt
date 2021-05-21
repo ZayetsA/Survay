@@ -14,5 +14,5 @@ interface AccessDao {
     suspend fun update(access: Access)
 
     @Query("SELECT * FROM access WHERE accessUserId = :userId AND accessTestId = :testId")
-    suspend fun getAccess(userId: Int, testId: Int): Access?
+    suspend fun getAccess(userId: Int, testId: Int): List<Access>
 }

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.onix.internship.survay.ui.admin.AdminViewModel" />
-
+            type="com.onix.internship.survay.ui.manager.results.ResultsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/userListLayout"
+        android:id="@+id/resultsContainerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.manager.results.ResultsFragment">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/userListLayoutToolbar"
+            android:id="@+id/resultsContainerToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/toolbar_margin_bottom_20"
@@ -26,14 +27,12 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userListRecycleView"
+            android:id="@+id/resultsContainerRecycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/userListLayoutToolbar"
-            android:layout_marginTop="?attr/actionBarSize">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_marginTop="?attr/actionBarSize"
+            app:layout_constraintTop_toBottomOf="@id/resultsContainerToolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

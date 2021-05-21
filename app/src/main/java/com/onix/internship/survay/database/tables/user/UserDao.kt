@@ -15,6 +15,15 @@ interface UserDao {
     @Update
     suspend fun update(user: User)
 
+    @Query("SELECT * FROM users WHERE role = :userRole")
+    suspend fun getStudents(userRole: UserRoleStates): List<User>
+
+    @Query("SELECT * FROM users WHERE userId = :userId")
+    suspend fun getUser(userId: Int): List<User>
+
+    @Query("UPDATE users SET role = :userRole WHERE userId = :userId")
+    suspend fun updateUserRole(userRole: UserRoleStates, userId: Int)
+
     @Query("SELECT * FROM users WHERE role = :user OR role = :manager")
     suspend fun getUsersAndMentors(user: UserRoleStates, manager: UserRoleStates): List<User>
 
@@ -22,7 +31,7 @@ interface UserDao {
     suspend fun get(login: String, password: String): List<User>
 
     @Query("SELECT * FROM users WHERE login LIKE :login")
-    suspend fun getLogin(login: String): User?
+    suspend fun getLogin(login: String): List<User>
 
     @Query("SELECT COUNT(*) FROM USERS")
     suspend fun getCount(): Int

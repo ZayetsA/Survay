@@ -54,7 +54,7 @@ class SignupViewModel(private val database: SurvayDatabase) : ViewModel() {
             if (!isEmpty()) {
                 viewModelScope.launch {
                     val username = database.userDatabaseDao.getLogin(login)
-                    if (username != null) {
+                    if (username.isNotEmpty()) {
                         _errorLogin.value = ErrorsCatcher.EXISTING_LOGIN
                     } else {
                         if (password != passwordConfirmation) {

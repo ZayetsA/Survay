@@ -1,8 +1,8 @@
 package com.onix.internship.survay.adapter
 
-import android.annotation.SuppressLint
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.onix.internship.survay.R
@@ -21,17 +21,21 @@ fun TextInputLayout.errorMessage(errorType: ErrorsCatcher) {
     }
 }
 
-@SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter("backgroundChecked")
 fun TextView.editBackground(isPressed: Boolean) {
     background = if (isPressed) {
-        resources.getDrawable(R.drawable.selected_option_bg)
+        ResourcesCompat.getDrawable(resources, R.drawable.selected_option_bg, null)
     } else {
-        resources.getDrawable(R.drawable.default_option_bg)
+        ResourcesCompat.getDrawable(resources, R.drawable.default_option_bg, null)
     }
 }
 
 @BindingAdapter("isActiveButton")
 fun Button.setupActive(userChoice: String?) {
     isEnabled = userChoice?.isNotEmpty() ?: false
+}
+
+@BindingAdapter("setResultText")
+fun TextView.setResultText(result: String) {
+    text = resources.getString(R.string.test_score_title, result)
 }
