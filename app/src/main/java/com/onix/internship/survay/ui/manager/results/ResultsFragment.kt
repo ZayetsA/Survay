@@ -40,7 +40,7 @@ class ResultsFragment : Fragment() {
     private fun setupToolBar() {
         with(binding.resultsContainerToolbar) {
             setNavigationIcon(R.drawable.toolbar_back_button_arrow)
-            title = context.getString(R.string.user_list_fragment_toolbar_title)
+            title = context.getString(R.string.manager_results_toolbar_title)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
     }

@@ -21,7 +21,7 @@ class ResultListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(testList[position])
-        holder.binding.userItemListView.setOnClickListener {
+        holder.binding.testItemListView.setOnClickListener {
             listener.onItemClick(testList[position])
         }
     }
@@ -34,7 +34,8 @@ class ResultListAdapter(
 class ViewHolder(val binding: TestItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(tests: Tests) {
         with(binding) {
-            userItemFirstName.text = tests.testName
+            testItemTestName.text = tests.testName
+            testItemTestDesc.text = tests.testDescriptor
         }
     }
 }

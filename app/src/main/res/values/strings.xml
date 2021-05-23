@@ -34,5 +34,14 @@
     <string name="manager_page_title">Hi, manager!</string>
     <string name="btn_to_results_text">Student results</string>
     <string name="btn_to_test_list_text">Tests</string>
+    <string name="add_new_test_desc">Add new test</string>
+    <string name="manager_page_toolbar_title">Manager page</string>
+    <string name="manager_results_toolbar_title">Results</string>
+    <string name="manager_testlist_toolbar_title">Tests</string>
+    <string name="input_question_hint">Enter question here!</string>
+    <string name="input_test_name_tint">Enter test name here!</string>
+    <string name="input_test_description_tint">Enter test description here!</string>
+    <string name="btn_submit_text">submit</string>
+    <string name="add_test_toolbar_text">Add new test</string>
 
 </resources>

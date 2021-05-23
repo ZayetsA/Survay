@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onix.internship.survay.database.SurvayDatabase
-import com.onix.internship.survay.util.UserRoleStates
 import kotlinx.coroutines.launch
 
 class ResultsViewModel(private val database: SurvayDatabase) : ViewModel() {
@@ -22,9 +21,7 @@ class ResultsViewModel(private val database: SurvayDatabase) : ViewModel() {
     private fun getStudentsResults() {
         viewModelScope.launch {
             model.apply {
-                users = database.userDatabaseDao.getStudents(
-                    UserRoleStates.USER
-                )
+                users = database.userDatabaseDao.getStudents()
                 resultList = database.resultDao.getAllResults()
                 tests = database.testsDao.getAllTests()
             }

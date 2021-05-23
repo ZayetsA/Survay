@@ -18,14 +18,14 @@ class StudentViewModel(private val database: SurvayDatabase) : ViewModel(),
     val test: LiveData<List<Tests>>
         get() = getTestList()
 
-    init {
-        insertTest1()
-        insertQuestion1()
-        insertAnswers1()
-////        insertTest2()
-////        insertQuestion2()
-//        insertAnswers2()
-    }
+//    init {
+//        insertTest1()
+//        insertQuestion1()
+//        insertAnswers1()
+//////        insertTest2()
+//////        insertQuestion2()
+////        insertAnswers2()
+//    }
 
     private val _navigationEvent = SingleLiveEvent<NavDirections>()
     val navigationEvent: LiveData<NavDirections> = _navigationEvent

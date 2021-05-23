@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/testItemLayout"
+        android:id="@+id/testDetailItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin_5"
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/testItemCardView"
+            android:id="@+id/testDetailItemCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -18,7 +18,7 @@
             android:focusable="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/testItemListView"
+                android:id="@+id/testDetailItemListVIew"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/cardview_body"
@@ -28,7 +28,7 @@
                 android:paddingBottom="@dimen/test_item_padding_vertical">
 
                 <TextView
-                    android:id="@+id/testItemTestName"
+                    android:id="@+id/testDetailItemTestName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/user_item_title_margin_10"
@@ -40,7 +40,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/testItemTestDesc"
+                    android:id="@+id/testDetailItemTestDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/user_item_title_margin_10"
@@ -50,8 +50,15 @@
                     android:textSize="@dimen/text_16"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/testItemTestName" />
+                    app:layout_constraintTop_toBottomOf="@id/testDetailItemTestName" />
 
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/testDetailItemTestIsAvailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

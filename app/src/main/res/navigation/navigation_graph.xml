@@ -94,5 +94,28 @@
         <action
             android:id="@+id/action_testListFragment_to_managerFragment"
             app:destination="@id/managerFragment" />
+        <action
+            android:id="@+id/action_testListFragment_to_createTestFragment"
+            app:destination="@id/createTestFragment" />
+        <action
+            android:id="@+id/action_testListFragment_to_createQuestionFragment"
+            app:destination="@id/createQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTestFragment"
+        android:name="com.onix.internship.survay.ui.manager.tests.new_test.CreateTestFragment"
+        android:label="CreateTestFragment" >
+        <action
+            android:id="@+id/action_createTestFragment_to_testListFragment"
+            app:destination="@id/testListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createQuestionFragment"
+        android:name="com.onix.internship.survay.ui.manager.tests.new_question.CreateQuestionFragment"
+        android:label="fragment_create_question"
+        tools:layout="@layout/fragment_create_question" >
+        <action
+            android:id="@+id/action_createQuestionFragment_to_testListFragment"
+            app:destination="@id/testListFragment" />
     </fragment>
 </navigation>

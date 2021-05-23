@@ -15,8 +15,8 @@ interface UserDao {
     @Update
     suspend fun update(user: User)
 
-    @Query("SELECT * FROM users WHERE role = :userRole")
-    suspend fun getStudents(userRole: UserRoleStates): List<User>
+    @Query("SELECT * FROM users")
+    suspend fun getStudents(): List<User>
 
     @Query("SELECT * FROM users WHERE userId = :userId")
     suspend fun getUser(userId: Int): List<User>
