@@ -1,14 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.manager.tests.new_question.CreateQuestionFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onix.internship.survay.ui.manager.tests.questions.new_question.CreateQuestionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/createQuestionLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/createQuestionToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/toolbar_margin_bottom_20"
+            android:background="@color/purple_500"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputQuestionLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorQuestion}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionToolbar"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_question_text"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testQuestion}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputFirstVarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorVarFirst}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputQuestionLayout"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputFirstVar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_first_text"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testVarFirst}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputSecondVarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorVarSecond}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputFirstVarLayout"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputSecondVar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_second_text"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testVarSecond}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputThirdVarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorVarThird}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputSecondVarLayout"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputThirdVar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_third_text"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testVarThird}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputFourthVarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorVarFourth}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputThirdVarLayout"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputFourthVar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_fourth_text"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testVarFourth}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputAnswerLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_input_margin_top_20"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorAnswer}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputFourthVarLayout"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_answer_text"
+                android:imeOptions="actionDone"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testAnswer}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/createQuestionSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/connect_btn_margin_top_30"
+            android:onClick="@{() -> viewModel.addQuestionToDatabase()}"
+            android:paddingStart="@dimen/apply_button_padding_40"
+            android:paddingEnd="@dimen/apply_button_padding_40"
+            android:text="@string/btn_submit_text"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputAnswerLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

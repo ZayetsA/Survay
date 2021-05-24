@@ -16,4 +16,7 @@ interface QuestionDao {
 
     @Query("SELECT * FROM questions WHERE questionTestId = :testId")
     suspend fun getQuestionsByTest(testId: Int): List<Question>
+
+    @Query("SELECT * FROM questions WHERE questionId = (SELECT MAX(questionId) FROM questions)")
+    suspend fun getLatestQuestion(): List<Question>
 }

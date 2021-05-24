@@ -1,4 +1,4 @@
-package com.onix.internship.survay.ui.manager.tests
+package com.onix.internship.survay.ui.manager.tests.questions.question_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,22 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onix.internship.survay.R
 import com.onix.internship.survay.database.SurvayDatabase
-import com.onix.internship.survay.databinding.FragmentTestListBinding
-import com.onix.internship.survay.ui.manager.tests.adapter.TestListAdapter
+import com.onix.internship.survay.databinding.FragmentQuestionListBinding
+import com.onix.internship.survay.ui.manager.tests.questions.question_list.adapter.QuestionListAdapter
 
-class TestListFragment : Fragment() {
-    private lateinit var binding: FragmentTestListBinding
+class QuestionListFragment : Fragment() {
 
+    private lateinit var binding: FragmentQuestionListBinding
 
-    private val adapter = TestListAdapter {
-        navigate(TestListFragmentDirections.actionTestListFragmentToQuestionListFragment2(it))
-    }
+    private val args: QuestionListFragmentArgs by navArgs()
 
-    private val viewModel: TestViewModel by viewModels {
-        TestViewModelFactory(
+    private val viewModel: QuestionListViewModel by viewModels {
+        QuestionListViewModelFactory(
+            args.test,
             SurvayDatabase.getInstance(requireContext())
         )
     }
@@ -32,7 +32,7 @@ class TestListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTestListBinding.inflate(inflater)
+        binding = FragmentQuestionListBinding.inflate(inflater)
         initRecyclerView()
         return binding.root
     }
@@ -45,20 +45,18 @@ class TestListFragment : Fragment() {
         viewModel.navigationEvent.observe(viewLifecycleOwner, ::navigate)
     }
 
-
     private fun setupToolBar() {
-        with(binding.testListLayoutToolbar) {
+        with(binding.questionListLayoutToolbar) {
             setNavigationIcon(R.drawable.toolbar_back_button_arrow)
-            title = context.getString(R.string.manager_testlist_toolbar_title)
-            setNavigationOnClickListener { navigate(TestListFragmentDirections.actionTestListFragmentToManagerFragment()) }
+            title = args.test.testName
+            setNavigationOnClickListener { navigate(QuestionListFragmentDirections.actionQuestionListFragment2ToTestListFragment()) }
         }
     }
 
     private fun initRecyclerView() {
-        binding.testListRecycleView.layoutManager = LinearLayoutManager(requireContext())
-        binding.testListRecycleView.adapter = adapter
-        viewModel.testsList.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
+        binding.questionListLayoutRecycleView.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.questions.observe(viewLifecycleOwner, {
+            binding.questionListLayoutRecycleView.adapter = QuestionListAdapter(it)
         })
     }
 

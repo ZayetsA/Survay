@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/tabFragment"
         android:name="com.onix.internship.survay.ui.tab.TabFragment"
-        android:label="TabFragment" >
+        android:label="TabFragment">
         <action
             android:id="@+id/action_tabFragment_to_admin"
             app:destination="@id/admin" />
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/studentFragment"
         android:name="com.onix.internship.survay.ui.student.list.StudentFragment"
-        android:label="StudentFragment" >
+        android:label="StudentFragment">
         <action
             android:id="@+id/action_studentFragment_to_tabFragment"
             app:destination="@id/tabFragment" />
@@ -43,7 +43,7 @@
         android:id="@+id/quizFragment"
         android:name="com.onix.internship.survay.ui.student.quiz.QuizFragment"
         android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" >
+        tools:layout="@layout/fragment_quiz">
         <action
             android:id="@+id/action_quizFragment_to_studentFragment"
             app:destination="@id/studentFragment" />
@@ -58,7 +58,7 @@
         android:id="@+id/resultFragment"
         android:name="com.onix.internship.survay.ui.student.result.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" >
+        tools:layout="@layout/fragment_result">
         <action
             android:id="@+id/action_resultFragment_to_studentFragment"
             app:destination="@id/studentFragment" />
@@ -67,7 +67,7 @@
         android:id="@+id/managerFragment"
         android:name="com.onix.internship.survay.ui.manager.home.ManagerFragment"
         android:label="fragment_manager"
-        tools:layout="@layout/fragment_manager" >
+        tools:layout="@layout/fragment_manager">
         <action
             android:id="@+id/action_managerFragment_to_tabFragment"
             app:destination="@id/tabFragment" />
@@ -82,7 +82,7 @@
         android:id="@+id/resultsFragment"
         android:name="com.onix.internship.survay.ui.manager.results.ResultsFragment"
         android:label="fragment_results"
-        tools:layout="@layout/fragment_results" >
+        tools:layout="@layout/fragment_results">
         <action
             android:id="@+id/action_resultsFragment_to_managerFragment"
             app:destination="@id/managerFragment" />
@@ -90,7 +90,7 @@
     <fragment
         android:id="@+id/testListFragment"
         android:name="com.onix.internship.survay.ui.manager.tests.TestListFragment"
-        android:label="TestListFragment" >
+        android:label="TestListFragment">
         <action
             android:id="@+id/action_testListFragment_to_managerFragment"
             app:destination="@id/managerFragment" />
@@ -98,24 +98,46 @@
             android:id="@+id/action_testListFragment_to_createTestFragment"
             app:destination="@id/createTestFragment" />
         <action
-            android:id="@+id/action_testListFragment_to_createQuestionFragment"
-            app:destination="@id/createQuestionFragment" />
+            android:id="@+id/action_testListFragment_to_questionListFragment2"
+            app:destination="@id/questionListFragment2" />
+        <action
+            android:id="@+id/action_testListFragment_to_managerFragment2"
+            app:destination="@id/managerFragment" />
     </fragment>
     <fragment
         android:id="@+id/createTestFragment"
         android:name="com.onix.internship.survay.ui.manager.tests.new_test.CreateTestFragment"
-        android:label="CreateTestFragment" >
+        android:label="CreateTestFragment">
         <action
             android:id="@+id/action_createTestFragment_to_testListFragment"
             app:destination="@id/testListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createQuestionFragment"
-        android:name="com.onix.internship.survay.ui.manager.tests.new_question.CreateQuestionFragment"
+        android:name="com.onix.internship.survay.ui.manager.tests.questions.new_question.CreateQuestionFragment"
         android:label="fragment_create_question"
-        tools:layout="@layout/fragment_create_question" >
+        tools:layout="@layout/fragment_create_question">
+        <argument
+            android:name="test"
+            app:argType="com.onix.internship.survay.database.tables.tests.Tests" />
         <action
-            android:id="@+id/action_createQuestionFragment_to_testListFragment"
+            android:id="@+id/action_createQuestionFragment_to_questionListFragment2"
+            app:destination="@id/questionListFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionListFragment2"
+        android:name="com.onix.internship.survay.ui.manager.tests.questions.question_list.QuestionListFragment"
+        android:label="fragment_question_list"
+        tools:layout="@layout/fragment_question_list">
+        <argument
+            android:name="test"
+            app:argType="com.onix.internship.survay.database.tables.tests.Tests" />
+
+        <action
+            android:id="@+id/action_questionListFragment2_to_createQuestionFragment"
+            app:destination="@id/createQuestionFragment" />
+        <action
+            android:id="@+id/action_questionListFragment2_to_testListFragment"
             app:destination="@id/testListFragment" />
     </fragment>
 </navigation>

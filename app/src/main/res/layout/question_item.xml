@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/testDetailItemLayout"
+        android:id="@+id/questionItemLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin_5"
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/testDetailItemCardView"
+            android:id="@+id/questionItemCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -18,7 +18,7 @@
             android:focusable="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/testDetailItemListVIew"
+                android:id="@+id/questionItemView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/cardview_body"
@@ -28,7 +28,7 @@
                 android:paddingBottom="@dimen/test_item_padding_vertical">
 
                 <TextView
-                    android:id="@+id/testDetailItemTestName"
+                    android:id="@+id/questionItemQuestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/user_item_title_margin_10"
@@ -38,28 +38,15 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/testDetailItemTestDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/user_item_title_margin_10"
-                    android:layout_marginTop="@dimen/user_item_subtitle_margin_5"
-                    android:text="@string/default_description"
-                    android:textColor="@color/tab_color_selected"
-                    android:textSize="@dimen/text_16"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/testDetailItemTestName" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/testListLayoutDeleteTest"
                 android:layout_width="@dimen/ic_delete_size"
                 android:layout_height="@dimen/ic_delete_size"
-                android:layout_gravity="center_vertical|end"
+                android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="@dimen/image_margin_end"
                 android:src="@drawable/remove"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </com.google.android.material.card.MaterialCardView>

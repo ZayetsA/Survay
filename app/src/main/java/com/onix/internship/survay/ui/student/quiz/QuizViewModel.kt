@@ -23,7 +23,7 @@ class QuizViewModel(private val database: SurvayDatabase, testId: Int) : ViewMod
             model.currentUser = database.authDao.getCurrentUser().user
             Log.d("TEST_ID", testId.toString())
             model.questionList =
-                database.questionAndAnswerDao.getQuestionsAndAnswers(0) // get from safeargs, but no tests, so 0
+                database.questionAndAnswerDao.getQuestionsAndAnswers(testId)
             setupQuestions()
             _isDataLoading.postValue(false)
         }

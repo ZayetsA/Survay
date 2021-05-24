@@ -1,18 +1,17 @@
-package com.onix.internship.survay.ui.manager.tests
+package com.onix.internship.survay.ui.manager.tests.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onix.internship.survay.R
 import com.onix.internship.survay.database.tables.tests.Tests
 import com.onix.internship.survay.databinding.TestDetailItemBinding
 
-class TestListAdapter(
-    private val testList: List<Tests>,
-    private val listener: TestViewModel
-) : RecyclerView.Adapter<ViewHolder>() {
+class TestListAdapter(private val listener: ((Tests) -> Unit)? = null) :
+    ListAdapter<Tests, ViewHolder>(DiffUtilCallback()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: TestDetailItemBinding =
@@ -21,26 +20,16 @@ class TestListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(testList[position])
-        holder.binding.testDetailItemTestIsAvailable.setOnCheckedChangeListener { _: CompoundButton, _: Boolean ->
-            listener.onAccessChange(
-                holder.binding.testDetailItemTestIsAvailable,
-                testList[position]
-            )
-        }
-    }
-
-    override fun getItemCount(): Int {
-        return testList.size
+        holder.bind(getItem(position), listener)
     }
 }
 
 class ViewHolder(val binding: TestDetailItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(test: Tests) {
+    fun bind(test: Tests, listener: ((Tests) -> Unit)?) {
         with(binding) {
             testDetailItemTestName.text = test.testName
             testDetailItemTestDesc.text = test.testDescriptor
-            // TODO: 21.05.2021 add isChecked state to checkbox 
+            testDetailItemListVIew.setOnClickListener { listener?.invoke(test) }
         }
     }
 }

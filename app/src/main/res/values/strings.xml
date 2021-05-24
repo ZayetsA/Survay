@@ -43,5 +43,12 @@
     <string name="input_test_description_tint">Enter test description here!</string>
     <string name="btn_submit_text">submit</string>
     <string name="add_test_toolbar_text">Add new test</string>
+    <string name="create_question_input_question_text">Input question here!</string>
+    <string name="create_question_input_first_text">Input first variant here!</string>
+    <string name="create_question_input_second_text">Input second variant here!</string>
+    <string name="create_question_input_third_text">Input third variant here!</string>
+    <string name="create_question_input_fourth_text">Input fourth variant here!</string>
+    <string name="create_question_input_answer_text">Input answer here!</string>
+    <string name="add_question_title">Add question</string>
 
 </resources>

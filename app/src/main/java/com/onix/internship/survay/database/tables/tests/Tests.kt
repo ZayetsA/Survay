@@ -1,9 +1,12 @@
 package com.onix.internship.survay.database.tables.tests
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "tests")
 data class Tests(
     @PrimaryKey(autoGenerate = true)
@@ -15,4 +18,4 @@ data class Tests(
 
     @ColumnInfo(name = "testDescription")
     var testDescriptor: String = ""
-)
+) : Parcelable

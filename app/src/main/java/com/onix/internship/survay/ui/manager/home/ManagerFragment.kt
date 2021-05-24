@@ -38,7 +38,7 @@ class ManagerFragment : Fragment() {
         with(binding.managerContainerToolbar) {
             setNavigationIcon(R.drawable.toolbar_back_button_arrow)
             title = context.getString(R.string.manager_page_toolbar_title)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
+            setNavigationOnClickListener { navigate(ManagerFragmentDirections.actionManagerFragmentToTabFragment()) }
         }
     }
 

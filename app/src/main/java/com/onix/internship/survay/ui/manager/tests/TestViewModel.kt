@@ -1,7 +1,5 @@
 package com.onix.internship.survay.ui.manager.tests
 
-import android.view.View
-import android.widget.CheckBox
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +10,7 @@ import com.onix.internship.survay.database.tables.tests.Tests
 import com.onix.internship.survay.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class TestViewModel(private val database: SurvayDatabase) : ViewModel(),
-    RecycleViewCheckBoxListener {
+class TestViewModel(private val database: SurvayDatabase) : ViewModel() {
 
     private var _testsList = MutableLiveData<List<Tests>>()
     val testsList: LiveData<List<Tests>>
@@ -29,19 +26,8 @@ class TestViewModel(private val database: SurvayDatabase) : ViewModel(),
         return _testsList
     }
 
-    fun openAddNewTestFragment(){
+    fun openAddNewTestFragment() {
         _navigationEvent.postValue(TestListFragmentDirections.actionTestListFragmentToCreateTestFragment())
     }
 
-
-    override fun onAccessChange(view: View, test: Tests) {
-        val checkBox = view as CheckBox
-        if (checkBox.isChecked) {
-            viewModelScope.launch {
-            }
-        } else {
-            viewModelScope.launch {
-            }
-        }
-    }
 }
