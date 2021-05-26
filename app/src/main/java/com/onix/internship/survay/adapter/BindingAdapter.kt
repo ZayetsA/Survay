@@ -1,5 +1,7 @@
 package com.onix.internship.survay.adapter
 
+import android.widget.Button
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.onix.internship.survay.R
@@ -16,4 +18,14 @@ fun TextInputLayout.errorMessage(errorType: ErrorsCatcher) {
         ErrorsCatcher.EXISTING_LOGIN -> context.getString(R.string.error_existing_username)
         ErrorsCatcher.EASY_PASSWORD -> context.getString(R.string.short_password_error)
     }
+}
+
+@BindingAdapter("isActiveButton")
+fun Button.isActiveButton(userChoice: Boolean) {
+    isEnabled = userChoice
+}
+
+@BindingAdapter("setResultText")
+fun TextView.setResultText(result: String) {
+    text = resources.getString(R.string.test_score_title, result)
 }

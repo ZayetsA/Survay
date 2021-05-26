@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onix.internship.survay.ui.student.quiz.QuizViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/questionsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/container_margin_30">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@{viewModel.testQuestion}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_24"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/questionsProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="false"
+            android:max="@{viewModel.testProgressBarMaxValue}"
+            android:minHeight="@dimen/progress_bar_min_height_50"
+            android:progress="@{viewModel.testProgressBarState}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionText" />
+
+        <TextView
+            android:id="@+id/progressBarProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewModel.testProgressBarText}"
+            android:textSize="@dimen/progress_text_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionsProgressBar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/questionsVariantsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressBarProgressText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_submit"
+            isActiveButton="@{viewModel.isItemClicked}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="@{() -> viewModel.onSubmitClick()}"
+            android:padding="16dp"
+            android:text="@string/buttonSubmitText"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/questionsVariantsRecyclerView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

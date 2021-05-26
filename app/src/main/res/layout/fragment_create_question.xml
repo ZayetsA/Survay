@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.onix.internship.survay.ui.manager.tests.questions.new_question.CreateQuestionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/createQuestionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/createQuestionToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/toolbar_margin_bottom_20"
+            android:background="@color/purple_500"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <TextView
+            android:id="@+id/createQuestionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title_mt_30"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/input_question_title"
+            android:textSize="@dimen/text_24"
+            app:layout_constraintBottom_toTopOf="@id/createQuestionInputQuestionLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionToolbar" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createQuestionInputQuestionLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/edit_text_margin_top_30"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorQuestion}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionTitle"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createQuestionInputQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_question_input_question_text"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.testQuestion}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/createQuestionSubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/button_submit_margin_top_40"
+            android:onClick="@{() -> viewModel.addQuestionToDatabase()}"
+            android:paddingStart="@dimen/apply_button_padding_40"
+            android:paddingEnd="@dimen/apply_button_padding_40"
+            android:text="@string/btn_submit_text"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createQuestionInputQuestionLayout"
+            tools:layout_editor_absoluteY="376dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

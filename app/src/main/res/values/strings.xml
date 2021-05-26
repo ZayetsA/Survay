@@ -24,4 +24,37 @@
     <string name="success_login_positive_button_text">OK</string>
     <string name="user_list_fragment_toolbar_title">Users</string>
     <string name="invalid_login_error">No such user! Please, sign up first!</string>
+    <string name="test_list_fragment_toolbar_title">Tests</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="some_great_image">some great image</string>
+    <string name="button_end_test_text">НА главную!</string>
+    <string name="title_congrats_text">Поздравляю,</string>
+    <string name="test_score_title">You score is: %1$s!</string>
+    <string name="result_fragment_title">Вы прошли тест!</string>
+    <string name="manager_page_title">Hi, manager!</string>
+    <string name="btn_to_results_text">Student results</string>
+    <string name="btn_to_test_list_text">Tests</string>
+    <string name="add_new_test_desc">Add new test</string>
+    <string name="manager_page_toolbar_title">Manager page</string>
+    <string name="manager_results_toolbar_title">Results</string>
+    <string name="manager_testlist_toolbar_title">Tests</string>
+    <string name="input_question_hint">Enter question here!</string>
+    <string name="input_test_name_tint">Enter test name here!</string>
+    <string name="input_test_description_tint">Enter test description here!</string>
+    <string name="btn_submit_text">submit</string>
+    <string name="add_test_toolbar_text">Add new test</string>
+    <string name="create_question_input_question_text">Input question here!</string>
+    <string name="create_question_input_first_text">Input first variant here!</string>
+    <string name="create_question_input_second_text">Input second variant here!</string>
+    <string name="create_question_input_third_text">Input third variant here!</string>
+    <string name="create_question_input_fourth_text">Input fourth variant here!</string>
+    <string name="create_question_input_answer_text">Input answer here!</string>
+    <string name="add_question_title">Add question</string>
+    <string name="input_question_title">Input you question here!</string>
+    <string name="new_answer_fab_desc">new answer</string>
+    <string name="create_answer_title">Create answer here!</string>
+    <string name="create_answer_input_answer_tint">Input answer here!</string>
+    <string name="create_answer_input_score_tint">Input score here!</string>
+    <string name="create_answer_toolbar_text">Create new answer</string>
+
 </resources>
