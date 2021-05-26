@@ -2,7 +2,6 @@ package com.onix.internship.survay.adapter
 
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
 import com.onix.internship.survay.R
@@ -21,18 +20,9 @@ fun TextInputLayout.errorMessage(errorType: ErrorsCatcher) {
     }
 }
 
-@BindingAdapter("backgroundChecked")
-fun TextView.editBackground(isPressed: Boolean) {
-    background = if (isPressed) {
-        ResourcesCompat.getDrawable(resources, R.drawable.selected_option_bg, null)
-    } else {
-        ResourcesCompat.getDrawable(resources, R.drawable.default_option_bg, null)
-    }
-}
-
 @BindingAdapter("isActiveButton")
-fun Button.setupActive(userChoice: String?) {
-    isEnabled = userChoice?.isNotEmpty() ?: false
+fun Button.isActiveButton(userChoice: Boolean) {
+    isEnabled = userChoice
 }
 
 @BindingAdapter("setResultText")

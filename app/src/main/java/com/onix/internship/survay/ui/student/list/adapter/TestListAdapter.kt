@@ -1,17 +1,17 @@
-package com.onix.internship.survay.ui.student.list
+package com.onix.internship.survay.ui.student.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onix.internship.survay.R
 import com.onix.internship.survay.database.tables.tests.Tests
 import com.onix.internship.survay.databinding.TestItemBinding
 
 class ResultListAdapter(
-    private val testList: List<Tests>,
     private val listener: TestItemOnClickListener
-) : RecyclerView.Adapter<ViewHolder>() {
+) : ListAdapter<Tests, ViewHolder>(DiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: TestItemBinding =
@@ -20,14 +20,10 @@ class ResultListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(testList[position])
+        holder.bind(getItem(position))
         holder.binding.testItemListView.setOnClickListener {
-            listener.onItemClick(testList[position])
+            listener.onItemClick(getItem(position))
         }
-    }
-
-    override fun getItemCount(): Int {
-        return testList.size
     }
 }
 

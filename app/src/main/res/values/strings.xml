@@ -50,5 +50,11 @@
     <string name="create_question_input_fourth_text">Input fourth variant here!</string>
     <string name="create_question_input_answer_text">Input answer here!</string>
     <string name="add_question_title">Add question</string>
+    <string name="input_question_title">Input you question here!</string>
+    <string name="new_answer_fab_desc">new answer</string>
+    <string name="create_answer_title">Create answer here!</string>
+    <string name="create_answer_input_answer_tint">Input answer here!</string>
+    <string name="create_answer_input_score_tint">Input score here!</string>
+    <string name="create_answer_toolbar_text">Create new answer</string>
 
 </resources>

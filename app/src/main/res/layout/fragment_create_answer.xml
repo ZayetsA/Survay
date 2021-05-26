@@ -7,16 +7,17 @@
 
         <variable
             name="viewModel"
-            type="com.onix.internship.survay.ui.manager.tests.questions.new_question.CreateQuestionViewModel" />
+            type="com.onix.internship.survay.ui.manager.tests.questions.question_list.variants.new_variant.CreateAnswerViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/createQuestionLayout"
+        android:id="@+id/createAnswerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/createQuestionToolbar"
+            android:id="@+id/createAnswerLayoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/toolbar_margin_bottom_20"
@@ -26,60 +27,88 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <TextView
-            android:id="@+id/createQuestionTitle"
+            android:id="@+id/createAnswerTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/title_mt_30"
             android:fontFamily="sans-serif-black"
-            android:text="@string/input_question_title"
+            android:text="@string/create_answer_title"
             android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toTopOf="@id/createQuestionInputQuestionLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/createQuestionToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/createAnswerLayoutToolbar" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/createQuestionInputQuestionLayout"
+            android:id="@+id/createAnswerInputAnswerLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/edit_text_margin_top_30"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/tab_color_unselected"
-            app:errorMessage="@{viewModel.errorQuestion}"
+            app:errorMessage="@{viewModel.errorAnswer}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/createQuestionTitle"
+            app:layout_constraintTop_toBottomOf="@id/createAnswerTitle"
             app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/createQuestionInputQuestion"
+                android:id="@+id/createAnswerInputAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/edit_text_mt_5"
-                android:hint="@string/create_question_input_question_text"
+                android:hint="@string/create_answer_input_answer_tint"
                 android:maxLength="50"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:text="@={viewModel.model.testQuestion}"
+                android:text="@={viewModel.model.questionAnswerVar}"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/text_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createAnswerInputScoreLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/edit_text_margin_top_30"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/tab_color_unselected"
+            app:errorMessage="@{viewModel.errorScore}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createAnswerInputAnswerLayout"
+            app:layout_constraintWidth_percent="0.8">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createAnswerInputScore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/edit_text_mt_5"
+                android:hint="@string/create_answer_input_score_tint"
+                android:inputType="number"
+                android:maxLength="50"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:singleLine="true"
+                android:text="@={viewModel.model.questionAnswerScore}"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/text_16" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/createQuestionSubmitButton"
+            android:id="@+id/createAnswerSubmitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/button_submit_margin_top_40"
-            android:onClick="@{() -> viewModel.addQuestionToDatabase()}"
+            android:onClick="@{() -> viewModel.addAnswerToDatabase()}"
             android:paddingStart="@dimen/apply_button_padding_40"
             android:paddingEnd="@dimen/apply_button_padding_40"
             android:text="@string/btn_submit_text"
             android:textSize="@dimen/text_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/createQuestionInputQuestionLayout"
+            app:layout_constraintTop_toBottomOf="@id/createAnswerInputScoreLayout"
             tools:layout_editor_absoluteY="376dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

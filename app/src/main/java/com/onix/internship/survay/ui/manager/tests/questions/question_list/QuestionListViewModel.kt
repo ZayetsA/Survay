@@ -6,25 +6,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.onix.internship.survay.database.SurvayDatabase
-import com.onix.internship.survay.database.tables.questions.QuestionAndAnswer
+import com.onix.internship.survay.database.tables.questions.Question
 import com.onix.internship.survay.database.tables.tests.Tests
 import com.onix.internship.survay.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class QuestionListViewModel(private val currentTest: Tests, private val database: SurvayDatabase) :
+class QuestionListViewModel(private val currentTests: Tests, private val database: SurvayDatabase) :
     ViewModel() {
 
     private val _navigationEvent = SingleLiveEvent<NavDirections>()
     val navigationEvent: LiveData<NavDirections> = _navigationEvent
 
-    private var _questions = MutableLiveData<List<QuestionAndAnswer>>()
-    val questions: LiveData<List<QuestionAndAnswer>>
+    private var _questions = MutableLiveData<List<Question>>()
+    val questions: LiveData<List<Question>>
         get() = getTests()
 
-    private fun getTests(): LiveData<List<QuestionAndAnswer>> {
+    private fun getTests(): LiveData<List<Question>> {
         viewModelScope.launch(Dispatchers.IO) {
-            _questions.postValue(database.questionAndAnswerDao.getQuestionsAndAnswers(currentTest.testId))
+            _questions.postValue(database.questionDao.getQuestionsByTest(currentTests.testId))
 
         }
         return _questions
@@ -33,7 +33,7 @@ class QuestionListViewModel(private val currentTest: Tests, private val database
     fun addQuestion() {
         _navigationEvent.postValue(
             QuestionListFragmentDirections.actionQuestionListFragment2ToCreateQuestionFragment(
-                currentTest
+                currentTests
             )
         )
     }

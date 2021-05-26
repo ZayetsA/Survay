@@ -15,19 +15,7 @@ data class Answer(
 
     @ColumnInfo(name = "score")
     var score: Int = 0,
-
-    @ColumnInfo(name = "var1")
-    var var1: String = "",
-
-    @ColumnInfo(name = "var2")
-    var var2: String = "",
-
-    @ColumnInfo(name = "var3")
-    var var3: String = "",
-
-    @ColumnInfo(name = "var4")
-    var var4: String = "",
-
-    @ColumnInfo(name = "answer")
-    var answer: String = ""
+    
+    @ColumnInfo(name = "text")
+    var text: String = ""
 )

@@ -21,6 +21,12 @@ class QuestionListFragment : Fragment() {
 
     private val args: QuestionListFragmentArgs by navArgs()
 
+    private val adapter = QuestionListAdapter {
+        navigate(
+            QuestionListFragmentDirections.actionQuestionListFragment2ToVariantsListFragment2(it, args.test)
+        )
+    }
+
     private val viewModel: QuestionListViewModel by viewModels {
         QuestionListViewModelFactory(
             args.test,
@@ -55,8 +61,9 @@ class QuestionListFragment : Fragment() {
 
     private fun initRecyclerView() {
         binding.questionListLayoutRecycleView.layoutManager = LinearLayoutManager(requireContext())
+        binding.questionListLayoutRecycleView.adapter = adapter
         viewModel.questions.observe(viewLifecycleOwner, {
-            binding.questionListLayoutRecycleView.adapter = QuestionListAdapter(it)
+            adapter.submitList(it)
         })
     }
 

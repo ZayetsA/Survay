@@ -52,77 +52,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/questionsProgressBar" />
 
-        <TextView
-            android:id="@+id/questionOption_1"
-            backgroundChecked="@{viewModel.isItem1Clicked}"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/questionsVariantsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/default_option_bg"
-            android:gravity="center"
-            android:onClick="@{() -> viewModel.onItem1Click()}"
-            android:padding="15dp"
-            android:text="@{viewModel.testOptionFirst}"
-            android:textColor="@color/color_gray"
-            android:textSize="@dimen/option_text_18"
+            android:layout_gravity="center"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBarProgressText" />
-
-        <TextView
-            android:id="@+id/questionOption_2"
-            backgroundChecked="@{viewModel.isItem2Clicked}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/default_option_bg"
-            android:gravity="center"
-            android:onClick="@{() -> viewModel.onItem2Click()}"
-            android:padding="15dp"
-            android:text="@{viewModel.testOptionSecond}"
-            android:textColor="@color/color_gray"
-            android:textSize="@dimen/option_text_18"
-            app:layout_constraintTop_toBottomOf="@id/questionOption_1" />
-
-        <TextView
-            android:id="@+id/questionOption_3"
-            backgroundChecked="@{viewModel.isItem3Clicked}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/default_option_bg"
-            android:gravity="center"
-            android:onClick="@{() -> viewModel.onItem3Click()}"
-            android:padding="15dp"
-            android:text="@{viewModel.testOptionThird}"
-            android:textColor="@color/color_gray"
-            android:textSize="@dimen/option_text_18"
-            app:layout_constraintTop_toBottomOf="@id/questionOption_2" />
-
-        <TextView
-            android:id="@+id/questionOption_4"
-            backgroundChecked="@{viewModel.isItem4Clicked}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/default_option_bg"
-            android:gravity="center"
-            android:onClick="@{() -> viewModel.onItem4Click()}"
-            android:padding="15dp"
-            android:text="@{viewModel.testOptionFourth}"
-            android:textColor="@color/color_gray"
-            android:textSize="@dimen/option_text_18"
-            app:layout_constraintTop_toBottomOf="@id/questionOption_3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_submit"
-            isActiveButton="@{viewModel.userResult}"
+            isActiveButton="@{viewModel.isItemClicked}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -132,6 +74,6 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/questionOption_4" />
+            app:layout_constraintTop_toBottomOf="@id/questionsVariantsRecyclerView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -25,11 +25,11 @@ class TestListAdapter(private val listener: ((Tests) -> Unit)? = null) :
 }
 
 class ViewHolder(val binding: TestDetailItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(test: Tests, listener: ((Tests) -> Unit)?) {
+    fun bind(tests: Tests, listener: ((Tests) -> Unit)?) {
         with(binding) {
-            testDetailItemTestName.text = test.testName
-            testDetailItemTestDesc.text = test.testDescriptor
-            testDetailItemListVIew.setOnClickListener { listener?.invoke(test) }
+            testDetailItemTestName.text = tests.testName
+            testDetailItemTestDesc.text = tests.testDescriptor
+            testDetailItemListVIew.setOnClickListener { listener?.invoke(tests) }
         }
     }
 }

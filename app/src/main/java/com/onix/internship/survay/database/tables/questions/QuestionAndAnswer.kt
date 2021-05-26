@@ -5,10 +5,10 @@ import androidx.room.Relation
 import com.onix.internship.survay.database.tables.answers.Answer
 
 data class QuestionAndAnswer(
-    @Embedded val question: Question = Question(),
+    @Embedded val question: Question,
     @Relation(
         parentColumn = "questionId",
-        entityColumn = "answerId"
+        entityColumn = "answerQuestionId"
     )
-    var answer: Answer = Answer()
+    val listOfVariants: List<Answer>
 )

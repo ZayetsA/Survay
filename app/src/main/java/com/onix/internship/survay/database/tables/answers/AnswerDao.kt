@@ -9,11 +9,9 @@ import androidx.room.Update
 interface AnswerDao {
     @Insert
     suspend fun insert(answer: Answer)
-
     @Update
     suspend fun update(answer: Answer)
 
     @Query("SELECT * FROM ANSWERS WHERE answerQuestionId = :questionId")
     suspend fun getAnswersByQuestion(questionId: Int): List<Answer>
-
 }

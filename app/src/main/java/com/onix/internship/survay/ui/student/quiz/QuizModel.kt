@@ -8,7 +8,6 @@ import com.onix.internship.survay.database.tables.user.User
 
 class QuizModel(
     _currentUser: User = User(),
-    _question: QuestionAndAnswer = QuestionAndAnswer(),
     _questionAndAnswer: List<QuestionAndAnswer> = emptyList()
 ) : BaseObservable() {
 
@@ -20,18 +19,9 @@ class QuizModel(
         }
 
     @Bindable
-    var questionList = _questionAndAnswer
+    var questionAndAnswerList = _questionAndAnswer
         set(value) {
             field = value
-            notifyPropertyChanged(BR.questionList)
+            notifyPropertyChanged(BR.questionAndAnswerList)
         }
-
-
-    @Bindable
-    var question = _question
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.question)
-        }
-
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.onix.internship.survay.R
 import com.onix.internship.survay.database.SurvayDatabase
 import com.onix.internship.survay.databinding.FragmentStudentBinding
+import com.onix.internship.survay.ui.student.list.adapter.ResultListAdapter
 
 class StudentFragment : Fragment() {
 
@@ -20,6 +21,8 @@ class StudentFragment : Fragment() {
             SurvayDatabase.getInstance(requireContext())
         )
     }
+
+    private lateinit var adapter: ResultListAdapter
     private lateinit var binding: FragmentStudentBinding
 
     override fun onCreateView(
@@ -27,6 +30,8 @@ class StudentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStudentBinding.inflate(inflater)
+        adapter = ResultListAdapter(viewModel)
+
         initRecyclerView()
         return binding.root
     }
@@ -48,9 +53,10 @@ class StudentFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        binding.testListRecycleView.layoutManager = LinearLayoutManager(this.context)
-        viewModel.test.observe(viewLifecycleOwner, {
-            binding.testListRecycleView.adapter = ResultListAdapter(it, viewModel)
+        binding.testListRecycleView.layoutManager = LinearLayoutManager(requireContext())
+        binding.testListRecycleView.adapter = adapter
+        viewModel.tests.observe(viewLifecycleOwner, {
+            adapter.submitList(it)
         })
     }
 

@@ -19,4 +19,6 @@
     <dimen name="ic_delete_size">25dp</dimen>
     <dimen name="image_margin_end">25dp</dimen>
     <dimen name="edit_text_mt_5">5dp</dimen>
+    <dimen name="title_mt_30">30dp</dimen>
+    <dimen name="button_submit_margin_top_40">40dp</dimen>
 </resources>

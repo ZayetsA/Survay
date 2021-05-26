@@ -8,10 +8,10 @@ import androidx.room.Update
 @Dao
 interface TestsDao {
     @Insert
-    suspend fun insert(test: Tests)
+    suspend fun insert(tests: Tests)
 
     @Update
-    suspend fun update(test: Tests)
+    suspend fun update(tests: Tests)
 
     @Query("SELECT * FROM TESTS")
     suspend fun getAllTests(): List<Tests>
